@@ -143,6 +143,36 @@ function copyCheat(code, btn) {
   });
 }
 
+
+// --- PHASE 3 LAUNCHERS ---
+function launchDiabloModal() {
+  launchGameModal('⚔️ Diablo 1 + Hellfire (DevilutionX)', '/diablo/');
+}
+function launchDiabloPopout() {
+  launchPopoutWindow('/diablo/', 'Diablo1_Web');
+}
+
+function launchTombRaiderModal() {
+  launchGameModal('🏛️ Tomb Raider (OpenLara 3D)', '/tombraider/');
+}
+function launchTombRaiderPopout() {
+  launchPopoutWindow('/tombraider/', 'TombRaider_OpenLara');
+}
+
+function launchHalfLifeModal() {
+  launchGameModal('λ Half-Life 1 Campaign (Black Mesa)', '/halflife/');
+}
+function launchHalfLifePopout() {
+  launchPopoutWindow('/halflife/', 'HalfLife_Campaign');
+}
+
+function launchHexGLModal() {
+  launchGameModal('🏎️ HexGL 3D Anti-Gravity Racer', '/arcade/hexgl/');
+}
+function launchHexGLPopout() {
+  launchPopoutWindow('/arcade/hexgl/', 'HexGL_Racer');
+}
+
 // 6. CS 1.6 Specific Helpers
 function launchCS16Modal() {
   launchGameModal('🎯 Counter-Strike 1.6 (WebAssembly Edition)', '/cs16/');
