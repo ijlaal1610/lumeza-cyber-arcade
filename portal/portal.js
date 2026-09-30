@@ -175,8 +175,36 @@ function launchHexGLPopout() {
 
 
 // --- WINDOWS 7 CLASSICS LAUNCHERS ---
+function launchComfyCakesModal() {
+  launchGameModal('🎂 Purble Place: Comfy Cakes (The Cake Factory)', '/win7/comfy-cakes/');
+}
+function launchComfyCakesPopout() {
+  launchPopoutWindow('/win7/comfy-cakes/', 'ComfyCakes_Win7');
+}
+
+function launchPurblePlaceModal() {
+  launchGameModal('🏘️ Purble Place (Full 3-in-1 Game Suite)', '/win7/purble-place/');
+}
+function launchPurblePlacePopout() {
+  launchPopoutWindow('/win7/purble-place/', 'PurblePlace_Win7');
+}
+
+function launchSpiderSolitaireModal() {
+  launchGameModal('🕷️ Windows 7 Spider Solitaire (Multi-Suit)', '/win7/cards/?game=spider');
+}
+function launchSpiderSolitairePopout() {
+  launchPopoutWindow('/win7/cards/?game=spider', 'SpiderSolitaire_Win7');
+}
+
+function launchFreecellModal() {
+  launchGameModal('🃏 Windows 7 FreeCell', '/win7/cards/?game=freecell');
+}
+function launchFreecellPopout() {
+  launchPopoutWindow('/win7/cards/?game=freecell', 'FreeCell_Win7');
+}
+
 function launchWin7DesktopModal() {
-  launchGameModal('🪟 Windows 7 Interactive Desktop Experience', '/win7/');
+  launchGameModal('🪟 Windows 7 Aero Desktop Simulator', '/win7/');
 }
 function launchWin7DesktopPopout() {
   launchPopoutWindow('/win7/', 'Windows7_Desktop');
