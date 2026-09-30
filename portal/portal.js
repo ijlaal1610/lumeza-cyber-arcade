@@ -197,7 +197,7 @@ function filterGames(category, btn) {
   // Handle retro arcade panel visibility
   const retroPanel = document.getElementById('retroArcadePanel');
   if (retroPanel) {
-    if (category === 'all' || category === 'arcade') {
+    if (category === 'all' || category === 'arcade' || category === 'retrox') {
       retroPanel.style.display = 'block';
     } else {
       retroPanel.style.display = 'none';

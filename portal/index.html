@@ -28,6 +28,7 @@
         <button class="nav-filter" onclick="filterGames('minecraft', this)">⛏️ MINECRAFT</button>
         <button class="nav-filter" onclick="filterGames('mario', this)">🍄 MARIO VAULT</button>
         <button class="nav-filter" onclick="filterGames('shooters', this)">🎯 SHOOTERS</button>
+        <button class="nav-filter" onclick="filterGames('retrox', this)">🕹️ RETROX HUB</button>
         <button class="nav-filter" onclick="filterGames('arcade', this)">👾 ARCADE</button>
       </nav>
 
@@ -185,6 +186,168 @@
             <div style="display:flex; gap: 6px;">
               <button class="tile-play-btn" onclick="launchMinecraftModal()">▶ PLAY</button>
               <button class="tile-play-btn" onclick="launchMinecraftPopout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      
+      <!-- RETROX UNIVERSAL STATION -->
+      <article class="game-tile" data-category="retrox arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #10192e, #060b14); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🕹️</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#00f0ff; border-color:#00f0ff;">MULTI-CORE WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">RetroX Console Hub</h3>
+          <p class="tile-desc">
+            Universal browser emulation station! Drag & drop any personal ROM (.gba, .sfc, .nes, .md, .bin) with instant auto-core detection, gamepad controls, save states, and zero server uploads.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">GBA · SNES · NES · Genesis</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🕹️ RetroX Universal Emulation Hub', '/retrox/')">▶ OPEN HUB</button>
+              <a href="/retrox/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MARIO VAULT 1: Super Mario World -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #2b1212, #120606); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🍄</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#ff3333; border-color:#ff3333;">SNES 16-BIT</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Super Mario World</h3>
+          <p class="tile-desc">
+            The definitive 16-bit 2D platforming masterpiece! Ride Yoshi across Dinosaur Land, unlock Star Road secret warps, fly with the Cape Feather, and defeat Bowser with instant browser save states.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Snes9x WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🍄 Super Mario World (SNES)', '/mario/smw/')">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchPopoutWindow('/mario/smw/', 'MarioWorld')">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MARIO VAULT 2: Super Mario All-Stars -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #36280b, #140e03); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">⭐</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#ffbb00; border-color:#ffbb00;">ALL-STARS 16-BIT</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Super Mario All-Stars</h3>
+          <p class="tile-desc">
+            The legendary 4-in-1 remastered epic! Includes 16-bit audiovisual remakes of <strong>Super Mario Bros. 1</strong>, <strong>Super Mario Bros. 2</strong>, <strong>Super Mario Bros. 3</strong>, and <strong>The Lost Levels</strong>.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Snes9x WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('⭐ Super Mario All-Stars (SNES)', '/mario/allstars/')">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchPopoutWindow('/mario/allstars/', 'MarioAllStars')">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MARIO VAULT 3: Super Mario Kart -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b3014, #081405); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🏎️</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#00ff66; border-color:#00ff66;">MODE-7 RACER</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Super Mario Kart</h3>
+          <p class="tile-desc">
+            The pioneer that launched the kart-racing genre! Race across Mushroom, Flower, and Star Cups with authentic Mode-7 pseudo-3D perspective, power slides, Banana Peels, and Red Shells.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Snes9x WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🏎️ Super Mario Kart (SNES)', '/mario/kart/')">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchPopoutWindow('/mario/kart/', 'MarioKart')">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MARIO VAULT 4: Yoshi's Island -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #2b1030, #0e0512); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🦖</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#d946ef; border-color:#d946ef;">SUPER FX2 WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Yoshi's Island (SMW 2)</h3>
+          <p class="tile-desc">
+            The hand-drawn visual masterpiece powered by the Super FX2 coprocessor! Guide Yoshi, flutter jump across tricky chasms, throw ricocheting eggs, and protect Baby Mario from Kamek.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Super FX2 WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🦖 Yoshi\'s Island (SNES)', '/mario/yoshi/')">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchPopoutWindow('/mario/yoshi/', 'YoshisIsland')">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MARIO VAULT 5: Super Mario Advance 4 (SMB3) -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #381c10, #140804); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🦝</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#f97316; border-color:#f97316;">GBA 32-BIT</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Super Mario Advance 4</h3>
+          <p class="tile-desc">
+            The celebrated Game Boy Advance edition of <strong>Super Mario Bros. 3</strong>! Features vibrant 32-bit colors, voice clips, Tanooki & Frog suits, airship battles, and buttery smooth controls.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">mGBA WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🦝 Super Mario Advance 4 (GBA)', '/mario/sma4/')">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchPopoutWindow('/mario/sma4/', 'MarioAdvance4')">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MARIO VAULT 6: Super Mario Bros. Classic (NES) -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #1f1b29, #08070d); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🏰</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#38bdf8; border-color:#38bdf8;">NES 1985 8-BIT</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Super Mario Bros. (NES)</h3>
+          <p class="tile-desc">
+            The timeless 1985 landmark that birthed modern console gaming. Dash through World 1-1, jump down green warp pipes, collect Fire Flowers, and conquer Bowser's castles in cycle-accurate 8-bit emulation.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">FCEUmm WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🏰 Super Mario Bros. (NES)', '/mario/smb1/')">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchPopoutWindow('/mario/smb1/', 'MarioBrosNES')">POPOUT ↗</button>
             </div>
           </div>
         </div>
@@ -554,6 +717,6 @@
   <div class="portal-toast" id="portalToast"></div>
 
   <!-- Scripts -->
-  <script src="portal.js?v=2.2"></script>
+  <script src="portal.js?v=2.3"></script>
 </body>
 </html>

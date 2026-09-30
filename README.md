@@ -49,16 +49,28 @@ By leveraging client-side WebAssembly (WASM), WebGL, and modern browser standard
 
 ---
 
-## 🚀 Master Roadmap & Upcoming Titles
+### 🍄 The Complete Mario Vault & Retro Classics
+- **🕹️ RetroX Universal Console Hub (`/retrox/`)**
+  - Multi-system browser emulation station powered by native WASM cores (`Snes9x`, `mGBA`, `FCEUmm`, `Genesis Plus GX`, `Beetle PSX`).
+  - Interactive Drag & Drop ROM Loader: load any `.gba`, `.sfc`, `.smc`, `.nes`, `.md`, `.gb`, `.gbc`, or `.bin` ROM with auto-detected cores, gamepad support, and local browser save states.
+- **🍄 Super Mario World (1990 SNES)** — Dinosaur Land, Yoshi mechanics, Cape Feather, Star Road.
+- **⭐ Super Mario All-Stars (1993 SNES)** — 4-in-1 remastered collection: SMB1, SMB2, SMB3, and The Lost Levels.
+- **🏎️ Super Mario Kart (1992 SNES)** — The Mode-7 pseudo-3D kart racing original with full Grand Prix cups.
+- **🦖 Yoshi's Island: SMW 2 (1995 SNES)** — Hand-drawn visual tour-de-force powered by the Super FX2 chip.
+- **🦝 Super Mario Advance 4: SMB3 (2003 GBA)** — 32-bit GBA remaster with voice clips and refined controls.
+- **🏰 Super Mario Bros. (1985 NES)** — Shigeru Miyamoto's foundational 8-bit classic in cycle-accurate emulation.
+
+---
+
+## 🚀 Master Roadmap & Upcoming Titles (Phase 3 Next)
 See the complete architecture blueprint: **[docs/ULTIMATE_GAMES_DEPLOYMENT_PLAN.md](docs/ULTIMATE_GAMES_DEPLOYMENT_PLAN.md)**
 
 Upcoming additions:
-1. **🍄 The Mario Vault** — Super Mario World (SNES), Super Mario All-Stars, Super Mario Kart, Yoshi's Island.
-2. **🕹️ RetroX Universal Console Station** — Multi-system emulator (GBA, SNES, NES, Genesis, PS1) with ROM drag-and-drop.
-3. **⚔️ Diablo 1 + Hellfire** — `DevilutionX` WebAssembly port.
-4. **🔬 Half-Life 1 Campaign** — Gordon Freeman Black Mesa storyline.
-5. **🏛️ Tomb Raider 1 & 2** — `OpenLara` 3D WebGL engine.
-6. **💥 Quake III Arena** — `ioquake3` 3D arena deathmatch.
+1. **⚔️ Diablo 1 + Hellfire** — `DevilutionX` WebAssembly port.
+2. **🔬 Half-Life 1 Campaign** — Gordon Freeman Black Mesa storyline via Xash3D.
+3. **🏛️ Tomb Raider 1 & 2** — `OpenLara` 3D WebGL engine.
+4. **💥 Quake III Arena** — `ioquake3` 3D arena deathmatch.
+5. **🏎️ HexGL** — Futuristic 3D anti-gravity WebGL time-trial racer.
 
 ---
 
