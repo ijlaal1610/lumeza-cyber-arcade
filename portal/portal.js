@@ -70,13 +70,47 @@ function closeGameModal() {
 
 function toggleModalFullscreen() {
   const modal = document.getElementById('gameModalOverlay');
-  if (!document.fullscreenElement) {
-    if (modal.requestFullscreen) modal.requestFullscreen();
-    else if (modal.webkitRequestFullscreen) modal.webkitRequestFullscreen();
+  if (!modal) return;
+  const doc = document;
+  const isFs = !!(doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement);
+  
+  if (!isFs) {
+    const req = modal.requestFullscreen || modal.webkitRequestFullscreen || modal.mozRequestFullScreen || modal.msRequestFullscreen;
+    if (req) {
+      req.call(modal).catch(err => {
+        console.warn('Modal fullscreen request failed:', err);
+      });
+    }
   } else {
-    if (document.exitFullscreen) document.exitFullscreen();
+    const exit = doc.exitFullscreen || doc.webkitExitFullscreen || doc.mozCancelFullScreen || doc.msExitFullscreen;
+    if (exit) exit.call(doc);
   }
 }
+
+function updateModalFsButtonText() {
+  const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+  const btn = document.querySelector('#gameModalOverlay .btn-modal-action[onclick*="toggleModalFullscreen"]');
+  if (btn) {
+    btn.textContent = isFs ? 'EXIT FULL' : '⛶ FULLSCREEN';
+  }
+}
+document.addEventListener('fullscreenchange', updateModalFsButtonText);
+document.addEventListener('webkitfullscreenchange', updateModalFsButtonText);
+
+window.addEventListener('keydown', (e) => {
+  const modal = document.getElementById('gameModalOverlay');
+  if (modal && modal.classList.contains('active')) {
+    if (e.key === 'F4' || (e.altKey && e.key === 'Enter')) {
+      e.preventDefault();
+      toggleModalFullscreen();
+    } else if (e.key === 'Escape') {
+      // If not in native fullscreen, close modal
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        closeGameModal();
+      }
+    }
+  }
+});
 
 // 4. Standalone Popout Window
 function launchPopoutWindow(url, title = 'LumezaGameWindow') {
@@ -142,7 +176,7 @@ function filterGames(category, btn) {
 
   const tiles = document.querySelectorAll('.game-tile');
   tiles.forEach(tile => {
-    const cats = tile.getAttribute('data-category') || '';
+    const cats = (tile.getAttribute('data-category') || '').split(' ');
     if (category === 'all' || cats.includes(category)) {
       tile.style.display = 'flex';
     } else {
@@ -153,20 +187,20 @@ function filterGames(category, btn) {
   // Handle hero vice city visibility
   const hero = document.getElementById('heroViceCity');
   if (hero) {
-    if (category === 'all' || category === 'vicecity' || category === 'action') {
+    if (category === 'all' || category === 'openworld' || category === 'vicecity') {
       hero.style.display = 'block';
     } else {
       hero.style.display = 'none';
     }
   }
 
-  // Handle retro panel visibility
-  const retro = document.getElementById('retroArcadePanel');
-  if (retro) {
-    if (category === 'all' || category === 'retro') {
-      retro.style.display = 'block';
+  // Handle retro arcade panel visibility
+  const retroPanel = document.getElementById('retroArcadePanel');
+  if (retroPanel) {
+    if (category === 'all' || category === 'arcade') {
+      retroPanel.style.display = 'block';
     } else {
-      retro.style.display = 'none';
+      retroPanel.style.display = 'none';
     }
   }
 }
@@ -389,4 +423,26 @@ function launchAngryBirdsModal() {
 }
 function launchAngryBirdsPopout() {
   launchPopoutWindow('/arcade/angry-birds/', 'AngryBirds_Classic');
+}
+
+// Phase 1 Game Launchers
+function launchMinecraftModal() {
+  launchGameModal('⛏️ Minecraft 1.8.8 (The Bountiful Update)', '/minecraft/');
+}
+function launchMinecraftPopout() {
+  launchPopoutWindow('/minecraft/', 'Minecraft_1_8_8');
+}
+
+function launchMario64Modal() {
+  launchGameModal('🍄 Super Mario 64 (PC Port WebGL 60 FPS)', '/mario64/');
+}
+function launchMario64Popout() {
+  launchPopoutWindow('/mario64/', 'SuperMario64');
+}
+
+function launchGTA3Modal() {
+  launchGameModal('🏙️ Grand Theft Auto III (Liberty City 2001)', '/gta3/');
+}
+function launchGTA3Popout() {
+  launchPopoutWindow('/gta3/', 'GTA3_LibertyCity');
 }

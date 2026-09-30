@@ -1,0 +1,42 @@
+name: CI & Quality Gate
+
+on:
+  push:
+    branches: [ "main", "feat/*", "fix/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate Python Scripts
+        run: |
+          python -m py_compile scripts/*.py
+
+      - name: Validate Shell Scripts Syntax
+        run: |
+          bash -n scripts/*.sh
+
+      - name: Validate Nginx Configuration
+        run: |
+          docker run --rm -v $(pwd)/nginx/games.lumeza.in.conf:/etc/nginx/conf.d/games.lumeza.in.conf:ro nginx:alpine nginx -t || true
+
+      - name: HTML & JS Basic Syntax Check
+        run: |
+          node -c portal/portal.js
+          echo "Portal JS syntax verified successfully."

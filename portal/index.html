@@ -23,12 +23,12 @@
 
       <!-- Category Filter Navigation -->
       <nav class="portal-nav">
-        <button class="nav-filter active" onclick="filterGames('all', this)">ALL</button>
-        <button class="nav-filter" onclick="filterGames('vicecity', this)">🌴 VICE CITY</button>
-        <button class="nav-filter" onclick="filterGames('cs16', this)">🎯 CS 1.6</button>
-        <button class="nav-filter" onclick="filterGames('action', this)">⚡ SHOOTERS</button>
+        <button class="nav-filter active" onclick="filterGames('all', this)">★ ALL GAMES</button>
+        <button class="nav-filter" onclick="filterGames('openworld', this)">🏙️ 3D OPEN WORLD</button>
+        <button class="nav-filter" onclick="filterGames('minecraft', this)">⛏️ MINECRAFT</button>
+        <button class="nav-filter" onclick="filterGames('mario', this)">🍄 MARIO VAULT</button>
+        <button class="nav-filter" onclick="filterGames('shooters', this)">🎯 SHOOTERS</button>
         <button class="nav-filter" onclick="filterGames('arcade', this)">👾 ARCADE</button>
-        <button class="nav-filter" onclick="filterGames('retro', this)">🕹️ RETRO</button>
       </nav>
 
       <!-- Right Meta & Discreet Switch -->
@@ -144,9 +144,101 @@
     </div>
 
     <div class="games-grid">
+      <!-- HEADLINER: Grand Theft Auto III (Liberty City 2001) -->
+      <article class="game-tile" data-category="openworld">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #161b26, #090c12); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🏙️</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#00f0ff; border-color:#00f0ff;">RE3 WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Grand Theft Auto III</h3>
+          <p class="tile-desc">
+            Explore Liberty City as Claude Speed in the revolutionary 3D open-world crime epic that defined modern gaming! Built on the re3 WebAssembly engine with authentic audio, vehicle handling, and persistent IndexedDB saves.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">re3 C++ WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGTA3Modal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchGTA3Popout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HEADLINER: Minecraft: The Bountiful Update (1.8.8) -->
+      <article class="game-tile" data-category="minecraft openworld">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b3815, #0c1c0a); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">⛏️</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#44ff44; border-color:#44ff44;">MINECRAFT WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Minecraft (EaglercraftX 1.8.8)</h3>
+          <p class="tile-desc">
+            Full desktop Minecraft 1.8.8 running natively in WebAssembly! Single-player Survival & Creative modes, Nether & End dimensions, Redstone mechanics, sound effects, custom skins, and local world saves in IndexedDB.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">EaglercraftX WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchMinecraftModal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchMinecraftPopout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HEADLINER: Super Mario 64 (PC Port WebGL 60 FPS) -->
+      <article class="game-tile" data-category="mario arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #421010, #170505); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🍄</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#ff3333; border-color:#ff3333;">60 FPS WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Super Mario 64 (PC Port)</h3>
+          <p class="tile-desc">
+            The landmark Nintendo 64 3D platformer running in silky 60 FPS WebGL via native C-to-WASM compilation! Features widescreen 16:9 rendering, gamepad & keyboard controls, save games, and classic castle exploration.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">SM64 WebGL Native C</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchMario64Modal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchMario64Popout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- HEADLINER: Angry Birds Classic -->
+      <article class="game-tile" data-category="arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #42280d, #1a0f05); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🐦</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#ffbb00; border-color:#ffbb00;">PHYSICS CANV</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Angry Birds Classic</h3>
+          <p class="tile-desc">
+            The authentic physics slingshot phenomenon rebuilt in HTML5 Canvas. Catapult Red, Chuck, and Bomb to demolish pig fortresses with full audio, multi-stage trajectory physics, and touch/mouse controls.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Canvas Engine</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchAngryBirdsModal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchAngryBirdsPopout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
 
       <!-- 1. Counter-Strike 1.6 Card -->
-      <article class="game-tile" data-category="cs16 action">
+      <article class="game-tile" data-category="shooters">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #2b1f0c, #14120f); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">🎯</span>
@@ -169,7 +261,7 @@
       </article>
 
       <!-- 2. Quake Classic Card -->
-      <article class="game-tile" data-category="action">
+      <article class="game-tile" data-category="shooters">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #360f0f, #140808); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">⚡</span>
@@ -192,7 +284,7 @@
       </article>
 
       <!-- 3. Doom Classic Card -->
-      <article class="game-tile" data-category="action retro">
+      <article class="game-tile" data-category="shooters arcade">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b2612, #0d120a); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">💀</span>
@@ -215,7 +307,7 @@
       </article>
 
       <!-- 4. GTA Vice City Tile Card -->
-      <article class="game-tile" data-category="vicecity action">
+      <article class="game-tile" data-category="openworld">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #3b102b, #110817); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">🌴</span>
@@ -238,7 +330,7 @@
       </article>
 
       <!-- 5. Space Invaders -->
-      <article class="game-tile" data-category="retro arcade">
+      <article class="game-tile" data-category="arcade">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #102a1b, #051009); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">👾</span>
@@ -284,7 +376,7 @@
       </article>
 
       <!-- 7. Asteroids Infinity -->
-      <article class="game-tile" data-category="retro arcade">
+      <article class="game-tile" data-category="arcade">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b263b, #0d1b2a); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">🚀</span>
@@ -307,7 +399,7 @@
       </article>
 
       <!-- 8. Breakout -->
-      <article class="game-tile" data-category="retro arcade">
+      <article class="game-tile" data-category="arcade">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #3d1b10, #140804); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">🧱</span>
@@ -376,7 +468,7 @@
       </article>
 
       <!-- 11. Comet Pinball -->
-      <article class="game-tile" data-category="retro arcade">
+      <article class="game-tile" data-category="arcade">
         <div class="tile-media">
           <div style="width:100%; height:100%; background: linear-gradient(135deg, #331528, #14050e); display:flex; align-items:center; justify-content:center;">
             <span style="font-size: 3.5rem;">⚡</span>
@@ -462,6 +554,6 @@
   <div class="portal-toast" id="portalToast"></div>
 
   <!-- Scripts -->
-  <script src="portal.js"></script>
+  <script src="portal.js?v=2.2"></script>
 </body>
 </html>
