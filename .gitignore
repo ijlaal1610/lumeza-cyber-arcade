@@ -1,0 +1,30 @@
+# Dependencies and virtual environments
+node_modules/
+venv/
+__pycache__/
+*.pyc
+
+# Large Binary Game Blobs & Temporary Archives
+*.bin
+*.iso
+*.img
+*.rom
+*.vmdk
+*.bak
+*.tmp
+*.log
+*.zip
+*.bsp
+*.pak
+*.wad
+
+# Allow specific configuration and text files
+!*.txt
+!*.json
+!*.md
+!*.yml
+!*.yaml
+
+# OS metadata
+.DS_Store
+Thumbs.db

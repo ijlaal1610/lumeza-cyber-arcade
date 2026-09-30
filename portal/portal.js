@@ -1,0 +1,392 @@
+/**
+ * LUMEZA CYBER-ARCADE // CORE JAVASCRIPT
+ * games.lumeza.in
+ */
+
+// 1. Toast Notification System
+function showToast(msg, duration = 3000) {
+  const toast = document.getElementById('portalToast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => {
+    toast.style.display = 'none';
+  }, duration);
+}
+
+// 2. Hidden Switch to Main Website (Crafted Soul)
+// Accessed by clicking the discreet top right glyph, or pressing Ctrl+Shift+H
+const MAIN_SITE_URL = 'https://craftedsoul.netlify.app';
+
+function openSecretSwitchModal() {
+  const modal = document.getElementById('secretSwitchModal');
+  if (modal) modal.classList.add('open');
+}
+
+function closeSecretSwitchModal() {
+  const modal = document.getElementById('secretSwitchModal');
+  if (modal) modal.classList.remove('open');
+}
+
+function executeSecretRedirect() {
+  showToast('⚡ Redirecting to Crafted Soul Core Workspace...');
+  setTimeout(() => {
+    window.location.href = MAIN_SITE_URL;
+  }, 400);
+}
+
+// Global hotkey: Ctrl + Shift + H
+window.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && (e.key === 'H' || e.key === 'h')) {
+    e.preventDefault();
+    openSecretSwitchModal();
+  }
+});
+
+// 3. Immersive Game Modal Launcher
+function launchGameModal(title, url) {
+  const modal = document.getElementById('gameModalOverlay');
+  const frame = document.getElementById('gameModalIframe');
+  const titleEl = document.getElementById('modalGameTitle');
+
+  if (!modal || !frame) return;
+
+  titleEl.textContent = title;
+  frame.src = url;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGameModal() {
+  const modal = document.getElementById('gameModalOverlay');
+  const frame = document.getElementById('gameModalIframe');
+
+  if (!modal || !frame) return;
+
+  frame.src = 'about:blank';
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function toggleModalFullscreen() {
+  const modal = document.getElementById('gameModalOverlay');
+  if (!document.fullscreenElement) {
+    if (modal.requestFullscreen) modal.requestFullscreen();
+    else if (modal.webkitRequestFullscreen) modal.webkitRequestFullscreen();
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen();
+  }
+}
+
+// 4. Standalone Popout Window
+function launchPopoutWindow(url, title = 'LumezaGameWindow') {
+  window.open(url, title, 'width=1280,height=800,menubar=no,toolbar=no,location=no,status=no,resizable=yes');
+  showToast('⚡ Game launched in dedicated popout window!');
+}
+
+// 5. Vice City Specific Helpers
+const VICE_CITY_URL = '/vicecity/?custom_saves=1';
+const VICE_CITY_MODAL_URL = '/vicecity/?custom_saves=1&embed=1';
+
+function launchViceCityModal() {
+  launchGameModal('🌴 GTA: Vice City (1986 Miami Edition)', VICE_CITY_MODAL_URL);
+}
+
+function launchViceCityPopout() {
+  launchPopoutWindow(VICE_CITY_URL, 'ViceCity_Miami_Edition');
+}
+
+function copyCheat(code, btn) {
+  navigator.clipboard.writeText(code).then(() => {
+    btn.classList.add('copied');
+    const orig = btn.innerHTML;
+    btn.innerHTML = `${code} <span>COPIED!</span>`;
+    showToast(`⚡ Cheat "${code}" copied! Press F3 or type it in game.`);
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = orig;
+    }, 1500);
+  });
+}
+
+// 6. CS 1.6 Specific Helpers
+function launchCS16Modal() {
+  launchGameModal('🎯 Counter-Strike 1.6 (WebAssembly Edition)', '/cs16/');
+}
+
+function launchCS16Popout() {
+  launchPopoutWindow('/cs16/', 'CounterStrike_16_WASM');
+}
+
+// 7. Quake & Doom Helpers (100% Native on VPS)
+function launchQuake3Modal() {
+  launchGameModal('⚡ Quake (1996 Classic)', '/quake/');
+}
+
+function launchQuake3Popout() {
+  launchPopoutWindow('/quake/', 'Quake_1996_Classic');
+}
+
+function launchDoomModal() {
+  launchGameModal('💀 DOOM (1993 Classic)', '/doom/');
+}
+
+function launchDoomPopout() {
+  launchPopoutWindow('/doom/', 'DOOM_1993_Classic');
+}
+
+// 8. Category Filter
+function filterGames(category, btn) {
+  document.querySelectorAll('.nav-filter').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const tiles = document.querySelectorAll('.game-tile');
+  tiles.forEach(tile => {
+    const cats = tile.getAttribute('data-category') || '';
+    if (category === 'all' || cats.includes(category)) {
+      tile.style.display = 'flex';
+    } else {
+      tile.style.display = 'none';
+    }
+  });
+
+  // Handle hero vice city visibility
+  const hero = document.getElementById('heroViceCity');
+  if (hero) {
+    if (category === 'all' || category === 'vicecity' || category === 'action') {
+      hero.style.display = 'block';
+    } else {
+      hero.style.display = 'none';
+    }
+  }
+
+  // Handle retro panel visibility
+  const retro = document.getElementById('retroArcadePanel');
+  if (retro) {
+    if (category === 'all' || category === 'retro') {
+      retro.style.display = 'block';
+    } else {
+      retro.style.display = 'none';
+    }
+  }
+}
+
+// 9. Retro Games: Snake, 2048, Minesweeper Engine
+let currentRetroGame = '2048';
+
+function switchRetroGame(game) {
+  currentRetroGame = game;
+  document.querySelectorAll('.arcade-tab-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-game') === game);
+  });
+
+  document.querySelectorAll('.retro-game-view').forEach(v => {
+    v.style.display = v.id === `view-${game}` ? 'block' : 'none';
+  });
+
+  if (game === 'snake') startSnakeGame();
+}
+
+// --- SNAKE GAME IMPLEMENTATION ---
+let snakeCanvas, snakeCtx, snakeLoop;
+let snake = [{ x: 10, y: 10 }];
+let food = { x: 5, y: 5 };
+let dx = 1, dy = 0;
+let snakeScore = 0;
+
+function startSnakeGame() {
+  snakeCanvas = document.getElementById('snakeCanvas');
+  if (!snakeCanvas) return;
+  snakeCtx = snakeCanvas.getContext('2d');
+  snake = [{ x: 10, y: 10 }];
+  dx = 1; dy = 0;
+  snakeScore = 0;
+  document.getElementById('snakeScore').textContent = '0';
+  spawnFood();
+  if (snakeLoop) clearInterval(snakeLoop);
+  snakeLoop = setInterval(updateSnake, 100);
+}
+
+function spawnFood() {
+  food = {
+    x: Math.floor(Math.random() * 20),
+    y: Math.floor(Math.random() * 20)
+  };
+}
+
+function updateSnake() {
+  if (!snakeCtx) return;
+  const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+
+  // Wall collisions (wrap around)
+  if (head.x < 0) head.x = 19;
+  if (head.x >= 20) head.x = 0;
+  if (head.y < 0) head.y = 19;
+  if (head.y >= 20) head.y = 0;
+
+  // Self collision
+  for (let i = 0; i < snake.length; i++) {
+    if (snake[i].x === head.x && snake[i].y === head.y) {
+      startSnakeGame();
+      return;
+    }
+  }
+
+  snake.unshift(head);
+
+  if (head.x === food.x && head.y === food.y) {
+    snakeScore += 10;
+    document.getElementById('snakeScore').textContent = snakeScore;
+    spawnFood();
+  } else {
+    snake.pop();
+  }
+
+  // Draw
+  snakeCtx.fillStyle = '#06080d';
+  snakeCtx.fillRect(0, 0, 400, 400);
+
+  // Food
+  snakeCtx.fillStyle = '#ff2a85';
+  snakeCtx.shadowColor = '#ff2a85';
+  snakeCtx.shadowBlur = 10;
+  snakeCtx.fillRect(food.x * 20 + 2, food.y * 20 + 2, 16, 16);
+
+  // Snake
+  snakeCtx.fillStyle = '#00f0ff';
+  snakeCtx.shadowColor = '#00f0ff';
+  snakeCtx.shadowBlur = 8;
+  snake.forEach((part, idx) => {
+    if (idx === 0) snakeCtx.fillStyle = '#fff';
+    else snakeCtx.fillStyle = '#00f0ff';
+    snakeCtx.fillRect(part.x * 20 + 1, part.y * 20 + 1, 18, 18);
+  });
+  snakeCtx.shadowBlur = 0;
+}
+
+window.addEventListener('keydown', (e) => {
+  if (currentRetroGame !== 'snake') return;
+  if (e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; e.preventDefault(); }
+  if (e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; e.preventDefault(); }
+  if (e.key === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; e.preventDefault(); }
+  if (e.key === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; e.preventDefault(); }
+});
+
+// --- 2048 GAME IMPLEMENTATION ---
+let board2048 = [
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0]
+];
+let score2048 = 0;
+
+function init2048() {
+  board2048 = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+  ];
+  score2048 = 0;
+  document.getElementById('score2048').textContent = '0';
+  addRandomTile2048();
+  addRandomTile2048();
+  render2048();
+}
+
+function addRandomTile2048() {
+  const empty = [];
+  for (let r = 0; r < 4; r++) {
+    for (let c = 0; c < 4; c++) {
+      if (board2048[r][c] === 0) empty.push({ r, c });
+    }
+  }
+  if (empty.length > 0) {
+    const { r, c } = empty[Math.floor(Math.random() * empty.length)];
+    board2048[r][c] = Math.random() < 0.9 ? 2 : 4;
+  }
+}
+
+function render2048() {
+  const container = document.getElementById('board2048Grid');
+  if (!container) return;
+  container.innerHTML = '';
+  for (let r = 0; r < 4; r++) {
+    for (let c = 0; c < 4; c++) {
+      const val = board2048[r][c];
+      const tile = document.createElement('div');
+      tile.className = `tile-2048 val-${val}`;
+      tile.textContent = val > 0 ? val : '';
+      container.appendChild(tile);
+    }
+  }
+}
+
+function move2048(direction) {
+  let moved = false;
+  // Standard 2048 slide & merge algorithm
+  const slide = (row) => {
+    let arr = row.filter(val => val);
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] === arr[i + 1]) {
+        arr[i] *= 2;
+        score2048 += arr[i];
+        arr[i + 1] = 0;
+      }
+    }
+    arr = arr.filter(val => val);
+    while (arr.length < 4) arr.push(0);
+    return arr;
+  };
+
+  if (direction === 'left' || direction === 'right') {
+    for (let r = 0; r < 4; r++) {
+      let row = board2048[r];
+      if (direction === 'right') row = row.reverse();
+      const newRow = slide(row);
+      if (direction === 'right') newRow.reverse();
+      if (newRow.join(',') !== board2048[r].join(',')) moved = true;
+      board2048[r] = newRow;
+    }
+  } else if (direction === 'up' || direction === 'down') {
+    for (let c = 0; c < 4; c++) {
+      let col = [board2048[0][c], board2048[1][c], board2048[2][c], board2048[3][c]];
+      if (direction === 'down') col = col.reverse();
+      const newCol = slide(col);
+      if (direction === 'down') newCol.reverse();
+      for (let r = 0; r < 4; r++) {
+        if (board2048[r][c] !== newCol[r]) moved = true;
+        board2048[r][c] = newCol[r];
+      }
+    }
+  }
+
+  if (moved) {
+    addRandomTile2048();
+    document.getElementById('score2048').textContent = score2048;
+    render2048();
+  }
+}
+
+window.addEventListener('keydown', (e) => {
+  if (currentRetroGame !== '2048') return;
+  if (e.key === 'ArrowLeft') { move2048('left'); e.preventDefault(); }
+  if (e.key === 'ArrowRight') { move2048('right'); e.preventDefault(); }
+  if (e.key === 'ArrowUp') { move2048('up'); e.preventDefault(); }
+  if (e.key === 'ArrowDown') { move2048('down'); e.preventDefault(); }
+});
+
+// Initialize on Load
+document.addEventListener('DOMContentLoaded', () => {
+  init2048();
+  showToast('🎮 Welcome to Lumeza Cyber-Arcade! GTA Vice City & CS 1.6 Ready.');
+});
+
+// Angry Birds Launchers
+function launchAngryBirdsModal() {
+  launchGameModal('🐦 Angry Birds Classic (HTML5 Edition)', '/arcade/angry-birds/');
+}
+function launchAngryBirdsPopout() {
+  launchPopoutWindow('/arcade/angry-birds/', 'AngryBirds_Classic');
+}

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumeza Arcade // GTA Vice City, CS 1.6 & Retro Classics</title>
+  <meta name="description" content="Dedicated WebAssembly and browser gaming portal featuring GTA: Vice City, Counter-Strike 1.6, Quake III Arena, Doom, and retro classics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="portal-header">
+    <div class="header-container">
+      <a href="index.html" class="portal-brand">
+        <div class="brand-icon">🎮</div>
+        <div class="brand-title">LUMEZA <span>ARCADE</span></div>
+      </a>
+
+      <!-- Category Filter Navigation -->
+      <nav class="portal-nav">
+        <button class="nav-filter active" onclick="filterGames('all', this)">ALL</button>
+        <button class="nav-filter" onclick="filterGames('vicecity', this)">🌴 VICE CITY</button>
+        <button class="nav-filter" onclick="filterGames('cs16', this)">🎯 CS 1.6</button>
+        <button class="nav-filter" onclick="filterGames('action', this)">⚡ SHOOTERS</button>
+        <button class="nav-filter" onclick="filterGames('arcade', this)">👾 ARCADE</button>
+        <button class="nav-filter" onclick="filterGames('retro', this)">🕹️ RETRO</button>
+      </nav>
+
+      <!-- Right Meta & Discreet Switch -->
+      <div class="header-meta">
+        <div class="meta-pill">
+          <span class="pulse-dot"></span>
+          <span>CLOUD ENGINE OK</span>
+        </div>
+
+        <!-- Hidden / Discreet Dual Website Switch -->
+        <div class="secret-switch-wrapper">
+          <button class="secret-glyph-btn" id="secretGlyphBtn" onclick="openSecretSwitchModal()" title="System Core [Ctrl+Shift+H]">
+            <span class="secret-glyph-icon">⟐</span>
+            <span>CORE</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hidden Switch Modal (Discreet switch to Crafted Soul main site) -->
+  <div class="secret-dialog-backdrop" id="secretSwitchModal" onclick="if(event.target===this)closeSecretSwitchModal()">
+    <div class="secret-dialog-card">
+      <div class="secret-badge">ENCRYPTED SWITCH GATEWAY</div>
+      <h3 class="secret-title">Switch Workspace</h3>
+      <p class="secret-desc">
+        You are about to switch from <strong>games.lumeza.in</strong> to the primary <strong>Crafted Soul Workspace</strong> (craftedsoul.netlify.app).
+      </p>
+      <div class="secret-btn-row">
+        <button class="btn-secret-primary" onclick="executeSecretRedirect()">⚡ SWITCH TO CRAFTED SOUL</button>
+        <button class="btn-secret-secondary" onclick="closeSecretSwitchModal()">STAY IN ARCADE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Viewport Content -->
+  <main class="portal-main">
+
+    <!-- HERO SPOTLIGHT: GTA VICE CITY (Miami 1986 Edition) -->
+    <section class="hero-vicecity" id="heroViceCity">
+      <div class="hero-glow-vc"></div>
+      <div class="vc-hero-content">
+        <div>
+          <div class="vc-tag-row">
+            <span class="tag-vc-flagship">★ FEATURED HEADLINER</span>
+            <span class="tag-vc-sub">100% SAVE READY</span>
+            <span class="tag-vc-sub">TOKEN: 10000</span>
+            <span class="tag-vc-sub">BROWSER NATIVE WASM</span>
+          </div>
+          <h1 class="vc-hero-title">GRAND THEFT AUTO<br>VICE CITY</h1>
+          <p class="vc-hero-desc">
+            Experience Tommy Vercetti's neon-drenched rise to power in 1986 Vice City. Rebuilt with high-fidelity WebAssembly, featuring full 3D graphics, authentic radio stations, keyboard + controller support, and pre-bundled 100% completion save file!
+          </p>
+
+          <div class="vc-action-row">
+            <button class="btn-vc-play" onclick="launchViceCityModal()">
+              <span>▶</span> PLAY VICE CITY NOW
+            </button>
+            <button class="btn-vc-popout" onclick="launchViceCityPopout()">
+              <span>↗</span> POP-OUT WINDOW
+            </button>
+            <a href="/saves/download/10000/vcsky.saves" class="btn-vc-save" download="vcsky.saves">
+              <span>💾</span> GET 100% SAVE BUNDLE
+            </a>
+          </div>
+
+          <div class="vc-feature-pills">
+            <div class="vc-feat">⚡ <strong>Audio:</strong> Flash FM / Wave 103</div>
+            <div class="vc-feat">🎮 <strong>Saves:</strong> Slot 1 Pre-loaded</div>
+            <div class="vc-feat">🚀 <strong>Performance:</strong> 60 FPS WebGL</div>
+          </div>
+        </div>
+
+        <!-- Right Preview Box with Quick Cheats -->
+        <div class="vc-preview-card">
+          <div class="vc-screen-mockup">
+            <div class="vc-screen-overlay">
+              <div class="vc-screen-logo">VICE CITY</div>
+              <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--vc-cyan); letter-spacing: 0.1em;">MIAMI 1986 // WASM REVC</div>
+              <button class="tile-play-btn" style="margin-top: 10px;" onclick="launchViceCityModal()">START MISSION</button>
+            </div>
+          </div>
+
+          <div class="vc-save-status-box">
+            <div class="vc-save-info">
+              <span>●</span>
+              <span>100% Save "Keep your Friends Close..." Loaded (Token: 10000)</span>
+            </div>
+          </div>
+
+          <!-- Quick Cheat Console -->
+          <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.75rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); margin-bottom: 0.5rem; text-transform: uppercase;">
+              ⚡ Quick Cheat Copier (Click to Copy):
+            </div>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button class="btn-modal-action" onclick="copyCheat('ASPIRINE', this)">ASPIRINE (Health)</button>
+              <button class="btn-modal-action" onclick="copyCheat('PRECIOUSPROTECTION', this)">ARMOR</button>
+              <button class="btn-modal-action" onclick="copyCheat('NUTTERTOOLS', this)">HEAVY WEAPONS</button>
+              <button class="btn-modal-action" onclick="copyCheat('PANZER', this)">TANK</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES CATALOG GRID -->
+    <div class="section-title-wrap">
+      <div>
+        <div class="section-label">TITLES & SOURCE PORTS</div>
+        <h2 class="section-h2">HIGH-PERFORMANCE GAME ARCHIVE</h2>
+      </div>
+    </div>
+
+    <div class="games-grid">
+
+      <!-- 1. Counter-Strike 1.6 Card -->
+      <article class="game-tile" data-category="cs16 action">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #2b1f0c, #14120f); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🎯</span>
+          </div>
+          <span class="tile-tag-badge cs">CS 1.6 WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Counter-Strike 1.6</h3>
+          <p class="tile-desc">
+            The legendary tactical FPS running natively in WebAssembly! Includes classic bots + community mod maps: <strong>cs_mansion</strong>, <strong>awp_india</strong>, <strong>fy_pool_day</strong>, <strong>fy_iceworld2k</strong>, and <strong>aim_headshot</strong>.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Xash3D WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchCS16Modal()">▶ PLAY</button>
+              <a href="/cs16/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Quake Classic Card -->
+      <article class="game-tile" data-category="action">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #360f0f, #140808); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">⚡</span>
+          </div>
+          <span class="tile-tag-badge fps">QUAKE 1996</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Quake (1996 Classic)</h3>
+          <p class="tile-desc">
+            The landmark dark fantasy 3D FPS by id Software! Battle across gothic dimensions with full mouse aim, rocket launcher, and nailguns in 100% native WebGL.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">WebQuake WebGL Native</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchQuake3Modal()">▶ PLAY</button>
+              <a href="/quake/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Doom Classic Card -->
+      <article class="game-tile" data-category="action retro">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b2612, #0d120a); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">💀</span>
+          </div>
+          <span class="tile-tag-badge retro">DOOM 1993</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">DOOM (Classic 1993)</h3>
+          <p class="tile-desc">
+            The grandfather of FPS games with native responsive scaling and built-in <strong>Drag & Drop Custom WAD Loader</strong>! Load SIGIL, DOOM 2, Brutal Doom, and community mods instantly.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">JS-DOS WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchDoomModal()">▶ PLAY</button>
+              <a href="/doom/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. GTA Vice City Tile Card -->
+      <article class="game-tile" data-category="vicecity action">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #3b102b, #110817); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🌴</span>
+          </div>
+          <span class="tile-tag-badge" style="color:var(--vc-pink); border-color:var(--vc-pink);">VICE CITY 100%</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">GTA: Vice City</h3>
+          <p class="tile-desc">
+            Open-world 3D sandbox in 1986 Florida. Pre-loaded with 100% save file, full radio broadcast, and smooth desktop controls.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">reVC WebAssembly</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchViceCityModal()">▶ PLAY</button>
+              <a href="/vicecity/?custom_saves=1" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Space Invaders -->
+      <article class="game-tile" data-category="retro arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #102a1b, #051009); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">👾</span>
+          </div>
+          <span class="tile-tag-badge retro">ARCADE 1978</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Space Invaders</h3>
+          <p class="tile-desc">
+            Defend Earth from descending waves of alien invaders! Authentic pixel arcade sound effects, barricades, and flying saucers.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Canvas Native</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('👾 Space Invaders', '/arcade/space-invaders/')">▶ PLAY</button>
+              <a href="/arcade/space-invaders/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. Hextris -->
+      <article class="game-tile" data-category="retro puzzle arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #2b1238, #0c0512); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🔷</span>
+          </div>
+          <span class="tile-tag-badge retro">HEX PUZZLE</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Hextris</h3>
+          <p class="tile-desc">
+            Fast-paced hexagonal puzzle game inspired by Tetris! Rotate the hexagon to match 3 or more blocks of the same color before stacking up.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 WebGL Native</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🔷 Hextris', '/arcade/hextris/')">▶ PLAY</button>
+              <a href="/arcade/hextris/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. Asteroids Infinity -->
+      <article class="game-tile" data-category="retro arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b263b, #0d1b2a); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🚀</span>
+          </div>
+          <span class="tile-tag-badge retro">VECTOR SPACE</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Asteroids Infinity</h3>
+          <p class="tile-desc">
+            Pilot your triangular spaceship through dense asteroid fields. Inertial thruster physics, hyperspace jump, and sharp vector mechanics.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Vector Physics</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🚀 Asteroids', '/arcade/asteroids/')">▶ PLAY</button>
+              <a href="/arcade/asteroids/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. Breakout -->
+      <article class="game-tile" data-category="retro arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #3d1b10, #140804); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🧱</span>
+          </div>
+          <span class="tile-tag-badge retro">BRICK BREAKER</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">HTML5 Breakout</h3>
+          <p class="tile-desc">
+            Classic paddle brick destruction! Deflect the bouncing ball, smash through multi-colored brick layers, and rack up high scores.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Canvas Engine</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🧱 Breakout', '/arcade/breakout/')">▶ PLAY</button>
+              <a href="/arcade/breakout/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9. Netris (Tetris) -->
+      <article class="game-tile" data-category="retro puzzle arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #102f38, #051419); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🕹️</span>
+          </div>
+          <span class="tile-tag-badge retro">TETRIS 1984</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Netris Classic</h3>
+          <p class="tile-desc">
+            The world's favorite falling tetromino puzzle game. Authentic gravity speeds, line-clear scoring, and instant responsive keyboard inputs.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Pure JavaScript</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🕹️ Netris', '/arcade/netris/')">▶ PLAY</button>
+              <a href="/arcade/netris/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10. Klondike Solitaire -->
+      <article class="game-tile" data-category="retro casual arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #122b19, #051208); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🃏</span>
+          </div>
+          <span class="tile-tag-badge retro">SOLITAIRE</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Klondike Solitaire</h3>
+          <p class="tile-desc">
+            The timeless desktop green-felt card game. Draw-1 or Draw-3 modes, smooth card drags, auto-complete foundations, and win animations.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Canvas Cards</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('🃏 Klondike Solitaire', '/arcade/klondike/')">▶ PLAY</button>
+              <a href="/arcade/klondike/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11. Comet Pinball -->
+      <article class="game-tile" data-category="retro arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #331528, #14050e); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">⚡</span>
+          </div>
+          <span class="tile-tag-badge retro">PINBALL</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Comet Pinball</h3>
+          <p class="tile-desc">
+            Retro electro-mechanical pinball table with spring plunger, multi-tier flippers, bumper chimes, and realistic ball physics.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">HTML5 Physics Engine</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchGameModal('⚡ Comet Pinball', '/arcade/pinball/')">▶ PLAY</button>
+              <a href="/arcade/pinball/" class="tile-play-btn" style="text-decoration:none;">PAGE ↗</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- RETRO ARCADE ZONE (In-Browser Lightweight Games) -->
+    <div class="section-title-wrap">
+      <div>
+        <div class="section-label">ZERO LOAD-TIME QUICK PLAY</div>
+        <h2 class="section-h2">RETRO ARCADE ZONE</h2>
+      </div>
+    </div>
+
+    <section class="retro-arcade-panel" id="retroArcadePanel">
+      <div class="arcade-nav-tabs">
+        <button class="arcade-tab-btn active" data-game="2048" onclick="switchRetroGame('2048')">🧩 2048 NEON</button>
+        <button class="arcade-tab-btn" data-game="snake" onclick="switchRetroGame('snake')">🐍 CYBER SNAKE</button>
+      </div>
+
+      <div class="arcade-view-container">
+
+        <!-- 2048 View -->
+        <div class="retro-game-view" id="view-2048" style="text-align: center;">
+          <div style="margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.9rem;">
+            SCORE: <span id="score2048" style="color: var(--vc-cyan); font-weight: bold; font-size: 1.2rem;">0</span>
+            <span style="color: var(--text-dim); margin-left: 1rem;">(Use Arrow Keys)</span>
+            <button class="btn-modal-action" style="margin-left: 1rem;" onclick="init2048()">↺ RESTART</button>
+          </div>
+          <div class="board-2048" id="board2048Grid" style="display: grid; grid-template-columns: repeat(4, 75px); grid-gap: 8px; justify-content: center; background: #121722; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Snake View -->
+        <div class="retro-game-view" id="view-snake" style="display:none; text-align: center;">
+          <div style="margin-bottom: 1rem; font-family: var(--font-mono); font-size: 0.9rem;">
+            SCORE: <span id="snakeScore" style="color: var(--vc-pink); font-weight: bold; font-size: 1.2rem;">0</span>
+            <span style="color: var(--text-dim); margin-left: 1rem;">(Use Arrow Keys)</span>
+            <button class="btn-modal-action" style="margin-left: 1rem;" onclick="startSnakeGame()">↺ RESTART</button>
+          </div>
+          <canvas id="snakeCanvas" width="400" height="400" style="background:#06080d; border: 2px solid rgba(0,240,255,0.4); border-radius: 8px; box-shadow: 0 0 20px rgba(0,240,255,0.2);"></canvas>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fullscreen Game Modal Overlay -->
+  <div class="game-modal-overlay" id="gameModalOverlay">
+    <div class="modal-bar">
+      <div class="modal-title-box">
+        <span style="color:var(--vc-pink); font-size:1.2rem;">🎮</span>
+        <span class="modal-game-title" id="modalGameTitle">GAME TITLE</span>
+      </div>
+      <div style="display:flex; gap: 8px; align-items:center;">
+        <button class="btn-modal-action" onclick="toggleModalFullscreen()">⛶ FULLSCREEN</button>
+        <button class="btn-modal-action btn-modal-close" onclick="closeGameModal()">✕ EXIT TO ARCADE</button>
+      </div>
+    </div>
+    <iframe class="modal-game-iframe" id="gameModalIframe" src="about:blank" allow="autoplay; fullscreen; gamepad; pointer-lock; keyboard; cross-origin-isolated"></iframe>
+  </div>
+
+  <!-- Global Toast Notification -->
+  <div class="portal-toast" id="portalToast"></div>
+
+  <!-- Scripts -->
+  <script src="portal.js"></script>
+</body>
+</html>
