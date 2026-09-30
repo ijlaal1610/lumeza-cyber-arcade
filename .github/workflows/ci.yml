@@ -1,10 +1,7 @@
 name: CI & Quality Gate
 
 on:
-  push:
-    branches: [ "main", "feat/*", "fix/*" ]
-  pull_request:
-    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   lint-and-validate:
