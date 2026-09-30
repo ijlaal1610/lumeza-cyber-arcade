@@ -203,12 +203,6 @@ function launchFreecellPopout() {
   launchPopoutWindow('/win7/cards/?game=freecell', 'FreeCell_Win7');
 }
 
-function launchWin7DesktopModal() {
-  launchGameModal('🪟 Windows 7 Aero Desktop Simulator', '/win7/');
-}
-function launchWin7DesktopPopout() {
-  launchPopoutWindow('/win7/', 'Windows7_Desktop');
-}
 
 function launchSpaceCadetPinballModal() {
   launchGameModal('🚀 3D Space Cadet Pinball (WASM)', '/win7/pinball/');
