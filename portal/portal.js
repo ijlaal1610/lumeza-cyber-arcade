@@ -173,6 +173,36 @@ function launchHexGLPopout() {
   launchPopoutWindow('/arcade/hexgl/', 'HexGL_Racer');
 }
 
+
+// --- WINDOWS 7 CLASSICS LAUNCHERS ---
+function launchWin7DesktopModal() {
+  launchGameModal('🪟 Windows 7 Interactive Desktop Experience', '/win7/');
+}
+function launchWin7DesktopPopout() {
+  launchPopoutWindow('/win7/', 'Windows7_Desktop');
+}
+
+function launchSpaceCadetPinballModal() {
+  launchGameModal('🚀 3D Space Cadet Pinball (WASM)', '/win7/pinball/');
+}
+function launchSpaceCadetPinballPopout() {
+  launchPopoutWindow('/win7/pinball/', 'SpaceCadetPinball');
+}
+
+function launchWin7MinesweeperModal() {
+  launchGameModal('💣 Windows 7 Minesweeper', '/win7/minesweeper/');
+}
+function launchWin7MinesweeperPopout() {
+  launchPopoutWindow('/win7/minesweeper/', 'Win7_Minesweeper');
+}
+
+function launchWin7SolitaireModal() {
+  launchGameModal('🃏 Windows 7 Solitaire (Klondike)', '/win7/solitaire/');
+}
+function launchWin7SolitairePopout() {
+  launchPopoutWindow('/win7/solitaire/', 'Win7_Solitaire');
+}
+
 // 6. CS 1.6 Specific Helpers
 function launchCS16Modal() {
   launchGameModal('🎯 Counter-Strike 1.6 (WebAssembly Edition)', '/cs16/');

@@ -30,6 +30,7 @@
         <button class="nav-filter" onclick="filterGames('rpg', this)">⚔️ RPG</button>
         <button class="nav-filter" onclick="filterGames('shooters', this)">🎯 SHOOTERS</button>
         <button class="nav-filter" onclick="filterGames('retrox', this)">🕹️ RETROX HUB</button>
+        <button class="nav-filter" onclick="filterGames('win7', this)">🪟 WINDOWS 7</button>
         <button class="nav-filter" onclick="filterGames('arcade', this)">👾 ARCADE</button>
         <a href="guide.html" class="nav-filter" style="text-decoration:none; display:inline-flex; align-items:center; gap:5px; border-color:rgba(0,240,255,0.4); color:var(--vc-cyan);" title="Player Manual & Controls Guide">📖 USER GUIDE</a>
       </nav>
@@ -159,7 +160,7 @@
         <div class="tile-body">
           <h3 class="tile-title">Diablo 1 + Hellfire</h3>
           <p class="tile-desc">
-            The landmark dark fantasy action RPG by Blizzard! Descend into the labyrinth beneath Tristram Cathedral as the Warrior, Rogue, or Sorcerer. Features built-in Shareware campaign, local IndexedDB saves, and full retail MPQ drag-and-drop.
+            The landmark dark fantasy action RPG by Blizzard! Descend into the labyrinth beneath Tristram Cathedral as the Warrior, Rogue, or Sorcerer. Full 16-floor commercial retail campaign unlocked! Descend into the catacombs and face Diablo himself with local IndexedDB saves.
           </p>
           <div class="tile-footer">
             <span class="tile-meta">DevilutionX WebAssembly</span>
@@ -258,6 +259,100 @@
             <div style="display:flex; gap: 6px;">
               <button class="tile-play-btn" onclick="launchGTA3Modal()">▶ PLAY</button>
               <button class="tile-play-btn" onclick="launchGTA3Popout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      
+      <!-- WINDOWS 7 CLASSICS -->
+      <!-- Win7 Desktop -->
+      <article class="game-tile" data-category="win7 arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #0b3c6d, #031b34); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🪟</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#00f0ff; border-color:#00f0ff;">WIN7 OS SIMULATOR</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Windows 7 Interactive Desktop</h3>
+          <p class="tile-desc">
+            Step inside the authentic Windows 7 Aero Glass operating system! Features Start menu, taskbar with peek previews, personalization themes, Media Player, Notepad, and windowed retro apps.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Aero Glass HTML5 OS</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchWin7DesktopModal()">▶ LAUNCH</button>
+              <button class="tile-play-btn" onclick="launchWin7DesktopPopout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3D Space Cadet Pinball -->
+      <article class="game-tile" data-category="win7 arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #1b0a3a, #0d041e); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🚀</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#bf55ec; border-color:#bf55ec;">WASM PINBALL 60 FPS</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">3D Space Cadet Pinball</h3>
+          <p class="tile-desc">
+            The legendary Windows pinball table reverse-engineered in WebAssembly! Authentic physics, space cadet cadet ranks, deployment ramps, hyperspace lights, high scores, and sound effects.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Decompiled C++ WASM</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchSpaceCadetPinballModal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchSpaceCadetPinballPopout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Windows 7 Minesweeper -->
+      <article class="game-tile" data-category="win7 arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #2b3a4a, #111a24); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">💣</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#ffcc00; border-color:#ffcc00;">AERO MINESWEEPER</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Windows 7 Minesweeper</h3>
+          <p class="tile-desc">
+            Authentic Windows 7 Aero styled Minesweeper! Features reactive smiley face, 7-segment digital timer, flag markers, first-click safety guarantee, and Beginner (9x9), Intermediate (16x16), and Expert (30x16) modes.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Aero Glass Logic</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchWin7MinesweeperModal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchWin7MinesweeperPopout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Windows 7 Solitaire -->
+      <article class="game-tile" data-category="win7 arcade">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #0e4c22, #06230f); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🃏</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#2ecc71; border-color:#2ecc71;">KLONDIKE SOLITAIRE</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Windows 7 Solitaire (Klondike)</h3>
+          <p class="tile-desc">
+            The beloved classic Windows green felt card game! Smooth drag-and-drop card physics, draw-1 or draw-3, double-click auto-foundation, and full Vegas scoring.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Classic Green Felt</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchWin7SolitaireModal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchWin7SolitairePopout()">POPOUT ↗</button>
             </div>
           </div>
         </div>
@@ -827,6 +922,6 @@
   <div class="portal-toast" id="portalToast"></div>
 
   <!-- Scripts -->
-  <script src="portal.js?v=2.4"></script>
+  <script src="portal.js?v=2.5"></script>
 </body>
 </html>
