@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumeza Arcade // Player Manual & Comprehensive Guide 📖🎮</title>
+  <meta name="description" content="Official user guide, controls, cheat codes, save management, and performance troubleshooting for Lumeza Cyber Arcade.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Rajdhani:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+  <style>
+    .guide-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem 1.5rem;
+    }
+
+    .guide-header-hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem 1rem;
+      position: relative;
+    }
+
+    .guide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: var(--vc-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .guide-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 30%, var(--vc-cyan) 70%, var(--vc-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .guide-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 1.75rem auto;
+      line-height: 1.6;
+    }
+
+    /* Guide Search & Filter */
+    .guide-search-wrapper {
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+      position: relative;
+    }
+
+    .guide-search-input {
+      width: 100%;
+      background: rgba(14, 18, 27, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      border-radius: 30px;
+      padding: 14px 22px 14px 48px;
+      color: #fff;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .guide-search-input:focus {
+      border-color: var(--vc-cyan);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+    }
+
+    .guide-search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* Fast Jump Navigation */
+    .guide-nav-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 3rem;
+    }
+
+    .guide-pill {
+      background: rgba(18, 23, 34, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .guide-pill:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--vc-cyan);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 240, 255, 0.2);
+    }
+
+    /* Section Cards */
+    .guide-section {
+      background: rgba(14, 18, 27, 0.75);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem;
+      margin-bottom: 2.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: border-color 0.2s;
+    }
+
+    .guide-section:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .guide-section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .section-icon-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 42, 133, 0.12);
+      border: 1px solid rgba(255, 42, 133, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .section-icon-badge.cyan {
+      background: rgba(0, 240, 255, 0.12);
+      border-color: rgba(0, 240, 255, 0.3);
+    }
+
+    .section-icon-badge.amber {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .section-icon-badge.emerald {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-left: auto;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    /* Grid Layouts inside sections */
+    .guide-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .guide-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .guide-card-sub {
+      background: rgba(20, 26, 38, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-md);
+      padding: 1.35rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .guide-card-sub:hover {
+      border-color: rgba(0, 240, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .sub-card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--vc-cyan);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sub-card-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 0.85rem;
+    }
+
+    /* Keybindings display */
+    kbd {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+      color: #fff;
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      margin: 1px 3px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.88rem;
+    }
+    .control-row:last-child {
+      border-bottom: none;
+    }
+    .control-label {
+      color: var(--text-muted);
+    }
+    .control-keys {
+      text-align: right;
+    }
+
+    /* Cheats Box */
+    .cheat-box {
+      background: rgba(10, 14, 22, 0.85);
+      border: 1px solid rgba(255, 42, 133, 0.25);
+      border-radius: var(--radius-md);
+      padding: 1.2rem;
+      margin-top: 1rem;
+    }
+    .cheat-header {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--vc-pink);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cheat-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 8px;
+    }
+    .cheat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .cheat-item:hover {
+      background: rgba(255, 42, 133, 0.12);
+      border-color: rgba(255, 42, 133, 0.4);
+    }
+    .cheat-code {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+    .cheat-desc {
+      color: var(--text-dim);
+      font-size: 0.78rem;
+    }
+
+    /* Alert / Warning Callout */
+    .guide-callout {
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+    .guide-callout.warning {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      color: #fde68a;
+    }
+    .guide-callout.info {
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: #a5f3fc;
+    }
+    .guide-callout.success {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #a7f3d0;
+    }
+    .callout-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Bottom Action Bar */
+    .guide-footer-cta {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(180deg, transparent, rgba(14, 18, 27, 0.9));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      margin-top: 3rem;
+    }
+
+    .btn-arcade-jump {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--vc-pink), #e11d48);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 800;
+      padding: 14px 36px;
+      border-radius: 30px;
+      text-decoration: none;
+      box-shadow: 0 0 25px var(--vc-pink-glow);
+      transition: all 0.25s ease;
+      letter-spacing: 0.5px;
+    }
+    .btn-arcade-jump:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 35px rgba(255, 42, 133, 0.7);
+    }
+
+    @media (max-width: 768px) {
+      .guide-section {
+        padding: 1.5rem 1rem;
+      }
+      .guide-grid-2, .guide-grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="portal-header">
+    <div class="header-container">
+      <a href="index.html" class="portal-brand">
+        <div class="brand-icon">🎮</div>
+        <div class="brand-title">LUMEZA <span>ARCADE</span></div>
+      </a>
+
+      <!-- Direct Return Navigation -->
+      <nav class="portal-nav">
+        <a href="index.html" class="nav-filter active" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+          ⬅️ BACK TO ARCADE
+        </a>
+      </nav>
+
+      <!-- Right Meta Status -->
+      <div class="header-meta">
+        <div class="meta-pill">
+          <span class="pulse-dot"></span>
+          <span>PLAYER MANUAL v2.4</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="guide-container">
+    
+    <!-- Hero Header -->
+    <div class="guide-header-hero">
+      <div class="guide-badge">⚡ OFFICIAL PLAYER HANDBOOK & TROUBLESHOOTING</div>
+      <h1 class="guide-title">Lumeza Cyber Arcade Guide 🍎🕹️</h1>
+      <p class="guide-subtitle">
+        Master every title in your self-hosted browser arcade. Complete keybindings, verified cheat codes, save-state handling, controller mappings, and performance optimization guides.
+      </p>
+
+      <!-- Search Bar -->
+      <div class="guide-search-wrapper">
+        <span class="guide-search-icon">🔍</span>
+        <input type="text" id="guideSearchInput" class="guide-search-input" placeholder="Search controls, cheat codes (e.g. panzer, aspirine), or games..." oninput="handleGuideSearch()">
+      </div>
+
+      <!-- Quick Navigation Jump Pills -->
+      <div class="guide-nav-pills">
+        <a href="#quickstart" class="guide-pill">🚀 Quick Start</a>
+        <a href="#vicecity" class="guide-pill">🏙️ GTA Vice City & III</a>
+        <a href="#minecraft" class="guide-pill">⛏️ Minecraft 1.8.8</a>
+        <a href="#mario" class="guide-pill">🍄 Mario Vault</a>
+        <a href="#retrox" class="guide-pill">🕹️ RetroX Hub (BYO ROMs)</a>
+        <a href="#shooters" class="guide-pill">🎯 CS 1.6 & Shooters</a>
+        <a href="#diablo" class="guide-pill">⚔️ Diablo 1 ARPG</a>
+        <a href="#tombraider" class="guide-pill">🏛️ Tomb Raider</a>
+        <a href="#saves" class="guide-pill">💾 Save Persistence</a>
+        <a href="#troubleshooting" class="guide-pill">⚡ Troubleshooting</a>
+      </div>
+    </div>
+
+    <!-- Section 1: Quick Start & Universal Controls -->
+    <section class="guide-section" id="quickstart">
+      <div class="guide-section-header">
+        <div class="section-icon-badge cyan">🚀</div>
+        <div>
+          <h2 class="section-title">Universal Browser Gaming Basics</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">Essential hotkeys and browser features that apply to all games</div>
+        </div>
+        <span class="section-tag">CORE ESSENTIALS</span>
+      </div>
+
+      <div class="guide-grid-3">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">⛶ Fullscreen Hotkeys</div>
+          <p class="sub-card-text">Every game supports instant edge-to-edge display with zero distraction.</p>
+          <div class="control-row">
+            <span class="control-label">Universal Fullscreen</span>
+            <span class="control-keys"><kbd>F4</kbd> or <kbd>Alt</kbd> + <kbd>Enter</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Header Button</span>
+            <span class="control-keys">Click <b>⛶ FULLSCREEN</b></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Exit Fullscreen</span>
+            <span class="control-keys"><kbd>Esc</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🖱️ Mouse & Pointer Lock</div>
+          <p class="sub-card-text">FPS games (CS 1.6, Quake, Doom, GTA) require 360° cursor capture.</p>
+          <div class="control-row">
+            <span class="control-label">Lock Cursor</span>
+            <span class="control-keys">Click inside game canvas</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Unlock / Release</span>
+            <span class="control-keys">Press <kbd>Esc</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Audio Unlock</span>
+            <span class="control-keys">Click once to start audio</span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🎮 Controller Support</div>
+          <p class="sub-card-text">Plug-and-play USB/Bluetooth gamepads work across RetroX, Mario 64, and Vice City.</p>
+          <div class="control-row">
+            <span class="control-label">Xbox / DualShock</span>
+            <span class="control-keys">Plug & Press any button</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Mapping</span>
+            <span class="control-keys">Auto-detected by WASM</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Mobile Touch</span>
+            <span class="control-keys">On-screen pads enabled</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: GTA Vice City & GTA III -->
+    <section class="guide-section" id="vicecity">
+      <div class="guide-section-header">
+        <div class="section-icon-badge">🏙️</div>
+        <div>
+          <h2 class="section-title">Grand Theft Auto: Vice City & GTA III</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">3D Open World classic campaigns with full radio stations, audio streaming & cheats</div>
+        </div>
+        <span class="section-tag">OPEN WORLD 3D</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🕹️ Movement & Vehicle Controls</div>
+          <div class="control-row">
+            <span class="control-label">Move / Steer</span>
+            <span class="control-keys"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Sprint / Accelerate</span>
+            <span class="control-keys"><kbd>Shift</kbd> / <kbd>W</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Jump / Handbrake</span>
+            <span class="control-keys"><kbd>Space</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Enter / Exit Car</span>
+            <span class="control-keys"><kbd>F</kbd> or <kbd>Enter</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Aim / Free Look</span>
+            <span class="control-keys"><kbd>Right Click</kbd> or <kbd>Delete</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Shoot / Horn</span>
+            <span class="control-keys"><kbd>Left Click</kbd> / <kbd>Shift</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Change Radio</span>
+            <span class="control-keys"><kbd>R</kbd> or <kbd>Insert</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">💡 Pro Tips & Saves</div>
+          <p class="sub-card-text">
+            <strong>Virtual Range Streaming:</strong> Vice City boots in seconds because the server streams 64KB audio/texture chunks on-demand instead of downloading 1.4GB all at once!
+          </p>
+          <p class="sub-card-text">
+            <strong>Save Games:</strong> Save Tommy Vercetti's progress at the Ocean View Hotel or safehouses. The game automatically synchronizes save files to browser IndexedDB (`reVCDOS_saves`).
+          </p>
+          <div class="guide-callout info" style="margin-bottom:0;">
+            <span class="callout-icon">ℹ️</span>
+            <div>Tip: If mouse aiming feels restricted, click into the canvas to engage <strong>Pointer Lock</strong>. Press <kbd>Esc</kbd> to pause and regain your desktop cursor.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vice City Cheats -->
+      <div class="cheat-box">
+        <div class="cheat-header">
+          <span>⚡ Vice City Keyboard Cheats (Type in real-time during gameplay)</span>
+          <span style="color:var(--text-dim); font-size:0.75rem;">Click code to copy</span>
+        </div>
+        <div class="cheat-list">
+          <div class="cheat-item" onclick="copyCheat('ASPIRINE')">
+            <span class="cheat-code">ASPIRINE</span>
+            <span class="cheat-desc">100% Health</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('PRECIOUSPROTECTION')">
+            <span class="cheat-code">PRECIOUSPROTECTION</span>
+            <span class="cheat-desc">100% Armor</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('PANZER')">
+            <span class="cheat-code">PANZER</span>
+            <span class="cheat-desc">Spawn Rhino Tank</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('NUTTERTOOLS')">
+            <span class="cheat-code">NUTTERTOOLS</span>
+            <span class="cheat-desc">Heavy Weapons Set</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('THUGSTOOLS')">
+            <span class="cheat-code">THUGSTOOLS</span>
+            <span class="cheat-desc">Basic Weapons Set</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('PROFESSIONALTOOLS')">
+            <span class="cheat-code">PROFESSIONALTOOLS</span>
+            <span class="cheat-desc">Medium Weapons Set</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('LEAVEMEALONE')">
+            <span class="cheat-code">LEAVEMEALONE</span>
+            <span class="cheat-desc">0 Wanted Stars</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('YOUWONTTAKEMEALIVE')">
+            <span class="cheat-code">YOUWONTTAKEMEALIVE</span>
+            <span class="cheat-desc">+2 Wanted Stars</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('SEAWAYS')">
+            <span class="cheat-code">SEAWAYS</span>
+            <span class="cheat-desc">Cars Drive on Water</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('BIGBANG')">
+            <span class="cheat-code">BIGBANG</span>
+            <span class="cheat-desc">Blow Up All Nearby Cars</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('COMEFLYWITHME')">
+            <span class="cheat-code">COMEFLYWITHME</span>
+            <span class="cheat-desc">Cars Can Fly</span>
+          </div>
+          <div class="cheat-item" onclick="copyCheat('ONSPEED')">
+            <span class="cheat-code">ONSPEED</span>
+            <span class="cheat-desc">Fast Motion</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Minecraft 1.8.8 -->
+    <section class="guide-section" id="minecraft">
+      <div class="guide-section-header">
+        <div class="section-icon-badge emerald">⛏️</div>
+        <div>
+          <h2 class="section-title">Minecraft (EaglercraftX 1.8.8)</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">100% vanilla PC Minecraft running directly in your browser with singleplayer and local saves</div>
+        </div>
+        <span class="section-tag">SANDBOX SURVIVAL</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🎮 Default Keybindings</div>
+          <div class="control-row">
+            <span class="control-label">Walk / Strafe</span>
+            <span class="control-keys"><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Jump</span>
+            <span class="control-keys"><kbd>Space</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Sneak / Crouch</span>
+            <span class="control-keys"><kbd>Left Shift</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Sprint</span>
+            <span class="control-keys"><kbd>Left Ctrl</kbd> or Double-Tap <kbd>W</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Inventory</span>
+            <span class="control-keys"><kbd>E</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Drop Item</span>
+            <span class="control-keys"><kbd>Q</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Mine / Attack</span>
+            <span class="control-keys"><kbd>Left Click</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Place Block / Use</span>
+            <span class="control-keys"><kbd>Right Click</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">📦 Singleplayer Worlds & Backups</div>
+          <p class="sub-card-text">
+            EaglercraftX saves your worlds, seeds, inventory, Nether portals, and chests straight into your browser's <strong>IndexedDB</strong> database.
+          </p>
+          <div class="guide-callout success">
+            <span class="callout-icon">💾</span>
+            <div>
+              <strong>How to Backup / Export Worlds:</strong><br>
+              In the Singleplayer World Selection screen, click on your world and choose <strong>"Export World"</strong>. This downloads an <code>.epk</code> archive to your computer. You can re-import this file on any machine or browser!
+            </div>
+          </div>
+          <p class="sub-card-text">
+            <strong>Custom Skins:</strong> Go to <em>Options → Eaglercraft Settings → Edit Profile</em> to upload your own custom PNG skin texture!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Mario Collection & Mario 64 -->
+    <section class="guide-section" id="mario">
+      <div class="guide-section-header">
+        <div class="section-icon-badge">🍄</div>
+        <div>
+          <h2 class="section-title">The Complete Mario Vault & Super Mario 64</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">60 FPS native WebGL 3D Mario 64 plus the complete 1-click 16-bit SNES & GBA Mario classics</div>
+        </div>
+        <span class="section-tag">PLATFORMING LEGENDS</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🌟 Super Mario 64 (PC WebGL Port)</div>
+          <p class="sub-card-text">Runs at silky-smooth 60 frames per second with widescreen 16:9 support.</p>
+          <div class="control-row">
+            <span class="control-label">Move Mario</span>
+            <span class="control-keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or <kbd>Arrow Keys</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Jump</span>
+            <span class="control-keys"><kbd>Space</kbd> or <kbd>C</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Punch / Attack</span>
+            <span class="control-keys"><kbd>X</kbd> or <kbd>L</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Crouch / Long Jump</span>
+            <span class="control-keys"><kbd>Z</kbd> or <kbd>K</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Camera Angle</span>
+            <span class="control-keys"><kbd>I</kbd> <kbd>J</kbd> <kbd>K</kbd> <kbd>L</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🕹️ 1-Click Mario Vault (SNES / NES / GBA)</div>
+          <p class="sub-card-text">
+            Play <em>Super Mario World</em>, <em>Super Mario All-Stars</em>, <em>Yoshi's Island</em>, and <em>Super Mario Kart</em> with zero setup.
+          </p>
+          <div class="control-row">
+            <span class="control-label">D-Pad / Steer</span>
+            <span class="control-keys"><kbd>Arrow Keys</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">A / B Buttons</span>
+            <span class="control-keys"><kbd>X</kbd> / <kbd>Z</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">X / Y Buttons</span>
+            <span class="control-keys"><kbd>S</kbd> / <kbd>A</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">L / R Bumpers</span>
+            <span class="control-keys"><kbd>Q</kbd> / <kbd>W</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Start / Select</span>
+            <span class="control-keys"><kbd>Enter</kbd> / <kbd>Shift</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Quick Save / Load</span>
+            <span class="control-keys"><kbd>Shift</kbd>+<kbd>F2</kbd> (Save) / <kbd>F2</kbd> (Load)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: RetroX Universal Hub -->
+    <section class="guide-section" id="retrox">
+      <div class="guide-section-header">
+        <div class="section-icon-badge cyan">🕹️</div>
+        <div>
+          <h2 class="section-title">RetroX Universal Multi-System Hub</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">Play any ROM from your personal collection: GBA, SNES, NES, Genesis, Game Boy & PS1</div>
+        </div>
+        <span class="section-tag">BYO ROMS</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">📁 How to Play Your ROMs</div>
+          <ol style="color:var(--text-muted); font-size:0.92rem; line-height:1.7; padding-left:1.2rem; margin-bottom:1rem;">
+            <li>Open the <strong>RetroX Hub</strong> from the top navigation bar.</li>
+            <li>Drag & drop any compatible ROM file anywhere into the dashed dropzone (or click <em>"Choose ROM File"</em>).</li>
+            <li>RetroX automatically identifies the console architecture, loads the optimized WebAssembly core, and starts the game instantly.</li>
+          </ol>
+          <div class="guide-callout info">
+            <span class="callout-icon">🔒</span>
+            <div><strong>100% Client-Side Privacy:</strong> Your ROM files are never uploaded to our server. They run purely in your browser's local WebAssembly memory space.</div>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🗂️ Supported Formats & Cores</div>
+          <div class="control-row">
+            <span class="control-label">Game Boy Advance (.gba)</span>
+            <span class="control-keys">mGBA Core</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Super Nintendo (.sfc, .smc)</span>
+            <span class="control-keys">Snes9x Core</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Nintendo Entertainment (.nes)</span>
+            <span class="control-keys">FCEUmm Core</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Sega Genesis / MegaDrive (.md, .bin)</span>
+            <span class="control-keys">Genesis Plus GX</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Game Boy / Color (.gb, .gbc)</span>
+            <span class="control-keys">Gambatte Core</span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Sony PlayStation 1 (.bin, .cue)</span>
+            <span class="control-keys">Beetle PSX Core</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: CS 1.6 & Classic Shooters -->
+    <section class="guide-section" id="shooters">
+      <div class="guide-section-header">
+        <div class="section-icon-badge amber">🎯</div>
+        <div>
+          <h2 class="section-title">Counter-Strike 1.6, Quake & Doom</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">Legendary PC first-person shooters running on native WebAssembly GoldSrc & id Tech engines</div>
+        </div>
+        <span class="section-tag">TACTICAL & ARENA FPS</span>
+      </div>
+
+      <div class="guide-grid-3">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🎯 Counter-Strike 1.6</div>
+          <div class="control-row">
+            <span class="control-label">Move / Strafe</span>
+            <span class="control-keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Aim / Shoot</span>
+            <span class="control-keys"><kbd>Mouse</kbd> / <kbd>Left Click</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Buy Menu</span>
+            <span class="control-keys"><kbd>B</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Reload / Use</span>
+            <span class="control-keys"><kbd>R</kbd> / <kbd>E</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Duck / Jump</span>
+            <span class="control-keys"><kbd>Ctrl</kbd> / <kbd>Space</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Scoreboard / Console</span>
+            <span class="control-keys"><kbd>Tab</kbd> / <kbd>~</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">💥 Quake III Arena & Quake 1</div>
+          <div class="control-row">
+            <span class="control-label">Strafe Jump</span>
+            <span class="control-keys"><kbd>Space</kbd> + <kbd>A</kbd>/<kbd>D</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Rocket / Railgun</span>
+            <span class="control-keys"><kbd>1</kbd> - <kbd>9</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Zoom View</span>
+            <span class="control-keys"><kbd>Right Click</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Console</span>
+            <span class="control-keys"><kbd>~</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Scores</span>
+            <span class="control-keys"><kbd>Tab</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">💀 Doom (1993) & Cheats</div>
+          <p class="sub-card-text">Classic id Software shareware wad with sound & music.</p>
+          <div class="control-row">
+            <span class="control-label">Shoot / Open Door</span>
+            <span class="control-keys"><kbd>Ctrl</kbd> / <kbd>Space</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Invulnerability</span>
+            <span class="control-keys">Type <kbd>IDDQD</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">All Weapons & Keys</span>
+            <span class="control-keys">Type <kbd>IDKFA</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">No Clipping</span>
+            <span class="control-keys">Type <kbd>IDCLIP</kbd></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Diablo 1 Action RPG -->
+    <section class="guide-section" id="diablo">
+      <div class="guide-section-header">
+        <div class="section-icon-badge">⚔️</div>
+        <div>
+          <h2 class="section-title">Diablo 1 + Hellfire (DevilutionX Web)</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">Crawl through the cathedral down to the pits of Hell with Warrior, Rogue, or Sorcerer</div>
+        </div>
+        <span class="section-tag">ACTION RPG</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🛡️ Controls & Interface</div>
+          <div class="control-row">
+            <span class="control-label">Move & Attack</span>
+            <span class="control-keys"><kbd>Left Click</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Stand Still & Attack</span>
+            <span class="control-keys"><kbd>Shift</kbd> + <kbd>Left Click</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Cast Selected Spell</span>
+            <span class="control-keys"><kbd>Right Click</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Character / Inventory</span>
+            <span class="control-keys"><kbd>C</kbd> / <kbd>I</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Quest Log / Spellbook</span>
+            <span class="control-keys"><kbd>Q</kbd> / <kbd>S</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Potion Belt Slots</span>
+            <span class="control-keys"><kbd>1</kbd> through <kbd>8</kbd></span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🔮 Shareware vs. Full Retail Campaign</div>
+          <p class="sub-card-text">
+            The portal includes the official Blizzard <strong>Shareware Edition</strong> (Floors 1-2, Butcher encounter) by default.
+          </p>
+          <div class="guide-callout success">
+            <span class="callout-icon">💎</span>
+            <div>
+              <strong>Upgrading to the Full Game:</strong><br>
+              If you own retail Diablo 1 (from GOG or CD), simply drag and drop your <code>DIABDAT.MPQ</code> file into the Diablo game screen. The engine unlocks all 16 dungeon depths, Hellfire expansions, and multiplayer!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Tomb Raider (OpenLara) -->
+    <section class="guide-section" id="tombraider">
+      <div class="guide-section-header">
+        <div class="section-icon-badge cyan">🏛️</div>
+        <div>
+          <h2 class="section-title">Tomb Raider (OpenLara WebGL Engine)</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">Lara Croft's original 3D adventures remastered with modern camera controls and water shaders</div>
+        </div>
+        <span class="section-tag">3D ADVENTURE</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🤸 Acrobatic Controls</div>
+          <div class="control-row">
+            <span class="control-label">Move / Run</span>
+            <span class="control-keys"><kbd>Arrow Keys</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Jump</span>
+            <span class="control-keys"><kbd>Alt</kbd> or <kbd>X</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Action / Grab Ledge / Shoot</span>
+            <span class="control-keys"><kbd>Ctrl</kbd> or <kbd>Z</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Draw / Holster Dual Pistols</span>
+            <span class="control-keys"><kbd>Space</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Roll (180° Turn)</span>
+            <span class="control-keys"><kbd>End</kbd> or <kbd>C</kbd></span>
+          </div>
+          <div class="control-row">
+            <span class="control-label">Walk / Careful Stepping</span>
+            <span class="control-keys"><kbd>Shift</kbd> (Prevents falling off cliffs)</span>
+          </div>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🏛️ Levels & Custom Files</div>
+          <p class="sub-card-text">
+            Explore Lara's Croft Manor Gym training course or delve into Peru, Greece, and Egypt.
+          </p>
+          <p class="sub-card-text">
+            <strong>Custom Level Loading:</strong> Click <em>"Browse Level"</em> to load any original <code>.PHD</code>, <code>.TR2</code>, or <code>.PSX</code> level file directly from your disk!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9: Save States & Data Persistence -->
+    <section class="guide-section" id="saves">
+      <div class="guide-section-header">
+        <div class="section-icon-badge emerald">💾</div>
+        <div>
+          <h2 class="section-title">Save Files, Storage & Data Safety</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">How your campaigns, high scores, and worlds are protected in your browser</div>
+        </div>
+        <span class="section-tag">DATA INTEGRITY</span>
+      </div>
+
+      <div class="guide-callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div>
+          <strong>IMPORTANT: Avoid Incognito / Private Browsing Mode!</strong><br>
+          Browsers automatically wipe all IndexedDB databases, save states, and cookies when an Incognito window is closed. To ensure your GTA missions, Minecraft builds, and RetroX save states stay safe, always play in normal browser tabs!
+        </div>
+      </div>
+
+      <div class="guide-grid-3">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🗄️ IndexedDB Storage</div>
+          <p class="sub-card-text">
+            Games like GTA: Vice City, GTA III, Minecraft, and Diablo write their saves to your browser's high-speed local <strong>IndexedDB</strong> virtual file system (`IDBFS`).
+          </p>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🔄 Clearing Cache Safely</div>
+          <p class="sub-card-text">
+            If you ever need to refresh game code, use <kbd>Ctrl</kbd> + <kbd>F5</kbd>. This refreshes the web assets without deleting your IndexedDB save files.
+          </p>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">📦 Manual Backups</div>
+          <p class="sub-card-text">
+            In Minecraft, click <em>Export World</em>. In RetroX, click the save state disk icon to download an offline copy of your save state directly.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 10: Troubleshooting & Performance -->
+    <section class="guide-section" id="troubleshooting">
+      <div class="guide-section-header">
+        <div class="section-icon-badge">⚡</div>
+        <div>
+          <h2 class="section-title">Troubleshooting & Performance Tuning</h2>
+          <div style="color:var(--text-muted); font-size:0.88rem;">Fix audio stuttering, low frame rates, or black screens in seconds</div>
+        </div>
+        <span class="section-tag">DIAGNOSTICS</span>
+      </div>
+
+      <div class="guide-grid-2">
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🚀 Enable Hardware Acceleration</div>
+          <p class="sub-card-text">
+            If 3D games (Vice City, GTA III, Mario 64) feel sluggish, make sure hardware graphics acceleration is turned on:
+          </p>
+          <ul style="color:var(--text-muted); font-size:0.9rem; line-height:1.7; padding-left:1.2rem;">
+            <li><strong>Chrome / Edge / Brave:</strong> Go to <code>settings/system</code> → Turn on <em>"Use graphics acceleration when available"</em> → Relaunch browser.</li>
+            <li><strong>Firefox:</strong> Go to <code>about:preferences</code> → General → Performance → Check <em>"Use recommended performance settings"</em>.</li>
+          </ul>
+        </div>
+
+        <div class="guide-card-sub">
+          <div class="sub-card-title">🔇 No Sound / Audio Not Playing?</div>
+          <p class="sub-card-text">
+            Modern browsers block audio autoplay until the user interacts with the page.
+          </p>
+          <div class="guide-callout info">
+            <span class="callout-icon">🔊</span>
+            <div><strong>Fix:</strong> Click anywhere on the game canvas. The browser will immediately resume the WebAudio context and audio will begin playing smoothly.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Return CTA -->
+    <div class="guide-footer-cta">
+      <h2 style="font-family:var(--font-display); font-size:2rem; font-weight:800; color:#fff; margin-bottom:0.75rem;">
+        Ready to Jump Back Into the Action?
+      </h2>
+      <p style="color:var(--text-muted); margin-bottom:1.75rem; font-size:1.05rem;">
+        Choose from dozens of arcade classics, open-world adventures, and retro legends.
+      </p>
+      <a href="index.html" class="btn-arcade-jump">
+        <span>🎮</span>
+        <span>LAUNCH ARCADE PORTAL</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Global Toast Notification -->
+  <div class="portal-toast" id="portalToast" style="display:none; position:fixed; bottom:25px; right:25px; background:rgba(14,18,27,0.95); border:1px solid var(--vc-cyan); color:#fff; padding:12px 20px; border-radius:10px; font-family:var(--font-mono); font-size:0.9rem; z-index:9999; box-shadow:0 0 20px rgba(0,240,255,0.3);"></div>
+
+  <script>
+    function copyCheat(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`Copied cheat: "${code}" to clipboard!`);
+      }).catch(() => {
+        showToast(`Cheat: ${code}`);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('portalToast');
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    }
+
+    function handleGuideSearch() {
+      const q = document.getElementById('guideSearchInput').value.toLowerCase().trim();
+      const sections = document.querySelectorAll('.guide-section');
+      
+      sections.forEach(sec => {
+        if (!q) {
+          sec.style.display = 'block';
+          // reset subcards
+          sec.querySelectorAll('.guide-card-sub, .cheat-item').forEach(el => el.style.display = '');
+          return;
+        }
+
+        const secText = sec.innerText.toLowerCase();
+        if (secText.includes(q)) {
+          sec.style.display = 'block';
+          // highlight or filter internal items
+          sec.querySelectorAll('.guide-card-sub').forEach(card => {
+            const cardText = card.innerText.toLowerCase();
+            card.style.display = cardText.includes(q) ? 'block' : 'none';
+          });
+          sec.querySelectorAll('.cheat-item').forEach(cheat => {
+            const cheatText = cheat.innerText.toLowerCase();
+            cheat.style.display = cheatText.includes(q) ? 'flex' : 'none';
+          });
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
