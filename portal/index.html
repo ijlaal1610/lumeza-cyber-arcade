@@ -21,20 +21,10 @@
         <div class="brand-title">LUMEZA <span>ARCADE</span></div>
       </a>
 
-      <!-- Category Filter Navigation -->
-      <nav class="portal-nav">
-        <button class="nav-filter active" onclick="filterGames('all', this)">★ ALL GAMES</button>
-        <button class="nav-filter" onclick="filterGames('strategy', this)">🏛️ STRATEGY</button>
-        <button class="nav-filter" onclick="filterGames('openworld', this)">🏙️ 3D OPEN WORLD</button>
-        <button class="nav-filter" onclick="filterGames('minecraft', this)">⛏️ MINECRAFT</button>
-        <button class="nav-filter" onclick="filterGames('mario', this)">🍄 MARIO VAULT</button>
-        <button class="nav-filter" onclick="filterGames('rpg', this)">⚔️ RPG</button>
-        <button class="nav-filter" onclick="filterGames('shooters', this)">🎯 SHOOTERS</button>
-        <button class="nav-filter" onclick="filterGames('retrox', this)">🕹️ RETROX HUB</button>
-        <button class="nav-filter" onclick="filterGames('win7', this)">🪟 WINDOWS 7</button>
-        <button class="nav-filter" onclick="filterGames('arcade', this)">👾 ARCADE</button>
-        <a href="guide.html" class="nav-filter" style="text-decoration:none; display:inline-flex; align-items:center; gap:5px; border-color:rgba(0,240,255,0.4); color:var(--vc-cyan);" title="Player Manual & Controls Guide">📖 USER GUIDE</a>
-      </nav>
+      <!-- Quick Guide Link -->
+      <div class="header-center-links">
+        <a href="guide.html" class="nav-guide-badge" title="Player Manual & Controls Guide">📖 USER MANUAL &amp; CHEATS</a>
+      </div>
 
       <!-- Right Meta & Discreet Switch -->
       <div class="header-meta">
@@ -178,6 +168,19 @@
         <h2 class="section-h2">HIGH-PERFORMANCE GAME ARCHIVE</h2>
       </div>
     </div>
+    <!-- Category Filter Chips Bar -->
+    <nav class="category-pills-bar" aria-label="Game Categories">
+      <button class="nav-filter active" onclick="filterGames('all', this)">★ ALL GAMES</button>
+      <button class="nav-filter" onclick="filterGames('strategy', this)">🏛️ STRATEGY</button>
+      <button class="nav-filter" onclick="filterGames('openworld', this)">🏙️ 3D OPEN WORLD</button>
+      <button class="nav-filter" onclick="filterGames('minecraft', this)">⛏️ MINECRAFT</button>
+      <button class="nav-filter" onclick="filterGames('mario', this)">🍄 MARIO VAULT</button>
+      <button class="nav-filter" onclick="filterGames('rpg', this)">⚔️ RPG</button>
+      <button class="nav-filter" onclick="filterGames('shooters', this)">🎯 SHOOTERS</button>
+      <button class="nav-filter" onclick="filterGames('retrox', this)">🕹️ RETROX HUB</button>
+      <button class="nav-filter" onclick="filterGames('win7', this)">🪟 WINDOWS 7</button>
+      <button class="nav-filter" onclick="filterGames('arcade', this)">👾 ARCADE</button>
+    </nav>
 
     <div class="games-grid">
 
