@@ -631,9 +631,103 @@ function applyShelfLayout(active) {
 }
 
 // ==========================================================================
-// 11. THEME & LAYOUT CONTROLLERS
+// 11. THEME & LAYOUT CONTROLLERS (GTA VI EXTRAORDINARY TRANSITION)
 // ==========================================================================
-function setTheme(theme) {
+let gta6AudioCtx = null;
+let gta6Timer = null;
+
+function playGTA6SoundtrackChime() {
+  try {
+    const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtxClass) return;
+    if (!gta6AudioCtx) gta6AudioCtx = new AudioCtxClass();
+    if (gta6AudioCtx.state === 'suspended') gta6AudioCtx.resume();
+
+    const now = gta6AudioCtx.currentTime;
+
+    // 1. Deep Sub-Bass Punch (65Hz -> 28Hz 808 kick feel)
+    const subOsc = gta6AudioCtx.createOscillator();
+    const subGain = gta6AudioCtx.createGain();
+    subOsc.type = 'sine';
+    subOsc.frequency.setValueAtTime(70, now);
+    subOsc.frequency.exponentialRampToValueAtTime(28, now + 1.4);
+    subGain.gain.setValueAtTime(0.5, now);
+    subGain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+    subOsc.connect(subGain);
+    subGain.connect(gta6AudioCtx.destination);
+    subOsc.start(now);
+    subOsc.stop(now + 1.6);
+
+    // 2. 80s Miami Synth Chords (F maj9 / Dm9 lush progression: F3, A3, C4, E4, G4)
+    const chordFreqs = [174.61, 220.00, 261.63, 329.63, 392.00];
+    chordFreqs.forEach((freq, idx) => {
+      const osc = gta6AudioCtx.createOscillator();
+      const filter = gta6AudioCtx.createBiquadFilter();
+      const gain = gta6AudioCtx.createGain();
+
+      osc.type = idx % 2 === 0 ? 'sawtooth' : 'triangle';
+      osc.frequency.setValueAtTime(freq, now);
+      // Detune for authentic tape chorus thickness
+      osc.detune.setValueAtTime((idx - 2) * 12, now);
+
+      // Lowpass resonant sweep
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(320, now);
+      filter.frequency.exponentialRampToValueAtTime(3400, now + 0.45);
+      filter.frequency.exponentialRampToValueAtTime(650, now + 2.4);
+      filter.Q.setValueAtTime(3, now);
+
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.09, now + 0.18);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 2.6);
+
+      osc.connect(filter);
+      filter.connect(gain);
+      gain.connect(gta6AudioCtx.destination);
+
+      osc.start(now);
+      osc.stop(now + 2.7);
+    });
+  } catch (err) {
+    console.warn('GTA 6 Audio synthesis skipped:', err);
+  }
+}
+
+function triggerGTA6CinematicTransition() {
+  const overlay = document.getElementById('gta6CinematicOverlay');
+  if (!overlay) return;
+
+  // Sound effect
+  playGTA6SoundtrackChime();
+
+  // Show cinematic overlay
+  overlay.classList.add('active');
+
+  if (gta6Timer) clearTimeout(gta6Timer);
+  // Auto dismiss after 2.8 seconds
+  gta6Timer = setTimeout(() => {
+    dismissGTA6Intro();
+  }, 2800);
+}
+
+function dismissGTA6Intro() {
+  const overlay = document.getElementById('gta6CinematicOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+  }
+  if (gta6Timer) {
+    clearTimeout(gta6Timer);
+    gta6Timer = null;
+  }
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    dismissGTA6Intro();
+  }
+});
+
+function setTheme(theme, isUserClick = true) {
   const validThemes = ['cyber', 'gta6', 'overdrive', 'crt'];
   if (!validThemes.includes(theme)) theme = 'cyber';
 
@@ -652,6 +746,10 @@ function setTheme(theme) {
   };
 
   showToast(`⚡ Theme: ${names[theme] || theme.toUpperCase()}`);
+
+  if (theme === 'gta6' && isUserClick) {
+    triggerGTA6CinematicTransition();
+  }
 }
 
 function setLayout(layout) {
@@ -815,9 +913,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Restore saved theme
   try {
     const savedTheme = localStorage.getItem('lumeza_theme') || 'cyber';
-    setTheme(savedTheme);
+    setTheme(savedTheme, false);
   } catch(e) {
-    setTheme('cyber');
+    setTheme('cyber', false);
   }
 
   // Restore saved layout

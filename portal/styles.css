@@ -1211,6 +1211,285 @@ body::before {
 }
 
 /* ==========================================================================
+   GTA VI CINEMATIC INTRO OVERLAY & ATMOSPHERIC SPECIAL FX
+   ========================================================================== */
+.gta6-cinematic-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at center, #2e0842 0%, #11021c 65%, #05000a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.gta6-cinematic-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Rotating Sunburst / Light Rays */
+.gta6-sunburst {
+  position: absolute;
+  width: 140vmax;
+  height: 140vmax;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 0, 127, 0.18) 0deg 15deg,
+    transparent 15deg 30deg,
+    rgba(255, 190, 11, 0.22) 30deg 45deg,
+    transparent 45deg 60deg,
+    rgba(0, 245, 212, 0.15) 60deg 75deg,
+    transparent 75deg 90deg,
+    rgba(255, 0, 127, 0.18) 90deg 105deg,
+    transparent 105deg 120deg,
+    rgba(255, 190, 11, 0.22) 120deg 135deg,
+    transparent 135deg 150deg,
+    rgba(131, 56, 236, 0.2) 150deg 165deg,
+    transparent 165deg 180deg,
+    rgba(255, 0, 127, 0.18) 180deg 195deg,
+    transparent 195deg 210deg,
+    rgba(255, 190, 11, 0.22) 210deg 225deg,
+    transparent 225deg 240deg,
+    rgba(0, 245, 212, 0.15) 240deg 255deg,
+    transparent 255deg 270deg,
+    rgba(255, 0, 127, 0.18) 270deg 285deg,
+    transparent 285deg 300deg,
+    rgba(255, 190, 11, 0.22) 300deg 315deg,
+    transparent 315deg 330deg,
+    rgba(131, 56, 236, 0.2) 330deg 345deg,
+    transparent 345deg 360deg
+  );
+  animation: sunburstRotate 40s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes sunburstRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.gta6-cinematic-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  animation: viEntrance 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes viEntrance {
+  0% { transform: scale(0.3) translateY(40px); opacity: 0; filter: blur(20px); }
+  70% { transform: scale(1.08) translateY(-6px); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
+}
+
+.gta6-state-tag {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  color: #ffbe0b;
+  text-shadow: 0 0 16px rgba(255, 190, 11, 0.7);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+/* Iconic Giant Roman "VI" */
+.gta6-giant-vi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial Black', Impact, sans-serif;
+  font-size: clamp(6.5rem, 18vw, 13rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin: 0.2rem 0;
+  user-select: none;
+}
+
+.gta6-giant-vi .vi-v,
+.gta6-giant-vi .vi-i {
+  background: linear-gradient(180deg, #ffffff 0%, #ff80bf 25%, #ff007f 55%, #ffbe0b 90%, #ffd166 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px rgba(255, 0, 127, 0.75)) drop-shadow(0 0 20px rgba(255, 190, 11, 0.5));
+  font-style: italic;
+  transform: skewX(-5deg);
+}
+
+.gta6-sub-brand {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 0, 127, 0.8), 0 0 40px rgba(255, 190, 11, 0.5);
+  font-style: italic;
+}
+
+.gta6-city-tag {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #00f5d4;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 0.4rem;
+  text-shadow: 0 0 12px rgba(0, 245, 212, 0.6);
+}
+
+.gta6-stars-row {
+  color: #ffbe0b;
+  font-size: 1.8rem;
+  letter-spacing: 0.3em;
+  margin-top: 1rem;
+  text-shadow: 0 0 16px rgba(255, 190, 11, 0.8);
+  animation: starPulseGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes starPulseGlow {
+  0% { transform: scale(0.96); filter: brightness(0.9); }
+  100% { transform: scale(1.08); filter: brightness(1.3); }
+}
+
+.gta6-skip-tip {
+  margin-top: 1.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 999px;
+  animation: skipBlink 2s infinite;
+}
+
+@keyframes skipBlink {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ==========================================================================
+   GTA VI TROPICAL PALM SILHOUETTES LAYER
+   ========================================================================== */
+.gta6-palms-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  display: none;
+  overflow: hidden;
+}
+
+[data-theme="gta6"] .gta6-palms-backdrop {
+  display: block;
+}
+
+.gta6-palm {
+  position: absolute;
+  bottom: -20px;
+  width: 320px;
+  height: 480px;
+  fill: #080112;
+  opacity: 0.88;
+  filter: drop-shadow(0 0 25px rgba(255, 0, 127, 0.3));
+  will-change: transform;
+}
+
+.palm-left {
+  left: -40px;
+  transform-origin: bottom left;
+  animation: palmBreezeLeft 7s ease-in-out infinite alternate;
+}
+
+.palm-right {
+  right: -40px;
+  transform: scaleX(-1);
+  transform-origin: bottom right;
+  animation: palmBreezeRight 8s ease-in-out infinite alternate;
+}
+
+@keyframes palmBreezeLeft {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(2.5deg) translateY(-4px); }
+  100% { transform: rotate(-1.5deg) translateY(2px); }
+}
+
+@keyframes palmBreezeRight {
+  0% { transform: scaleX(-1) rotate(0deg); }
+  50% { transform: scaleX(-1) rotate(-3deg) translateY(-5px); }
+  100% { transform: scaleX(-1) rotate(2deg) translateY(2px); }
+}
+
+/* GTA VI Brand Logo "VI" Badge */
+.gta6-logo-badge {
+  display: none;
+  font-family: 'Arial Black', Impact, sans-serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ff007f, #ffbe0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 1px 6px;
+  border: 1px solid #ffbe0b;
+  border-radius: 4px;
+  margin-left: 6px;
+  box-shadow: 0 0 10px rgba(255, 190, 11, 0.4);
+  vertical-align: middle;
+}
+
+[data-theme="gta6"] .gta6-logo-badge {
+  display: inline-block;
+}
+
+/* Wanted Level Star HUD in Header */
+.gta6-wanted-stars {
+  display: none;
+  color: #ffbe0b;
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 12px rgba(255, 190, 11, 0.7);
+  animation: starPulseGlow 1.5s ease-in-out infinite alternate;
+  user-select: none;
+  cursor: pointer;
+}
+
+[data-theme="gta6"] .gta6-wanted-stars {
+  display: flex;
+  align-items: center;
+}
+
+/* GTA VI Extra Shimmer on Tiles */
+[data-theme="gta6"] .game-tile::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  transform: skewX(-25deg);
+  transition: none;
+  pointer-events: none;
+}
+
+[data-theme="gta6"] .game-tile:hover::after {
+  left: 200%;
+  transition: all 0.8s ease-in-out;
+}
+
+/* ==========================================================================
    THEME 2: HYPER-ANIMATED OVERDRIVE (Animation in Every Single Thing)
    ========================================================================== */
 [data-theme="overdrive"] {

@@ -18,11 +18,12 @@
     <div class="header-container">
       <a href="index.html" class="portal-brand">
         <div class="brand-icon">🎮</div>
-        <div class="brand-title">LUMEZA <span>ARCADE</span></div>
+        <div class="brand-title">LUMEZA <span>ARCADE</span><span class="gta6-logo-badge">VI</span></div>
       </a>
 
-      <!-- Quick Guide Link -->
+      <!-- Quick Guide Link & GTA VI Wanted Stars -->
       <div class="header-center-links">
+        <div class="gta6-wanted-stars" title="State of Leonida Wanted Level: ★★★★★">★★★★★</div>
         <a href="guide.html" class="nav-guide-badge" title="Player Manual & Controls Guide">📖 USER MANUAL &amp; CHEATS</a>
       </div>
 
@@ -312,6 +313,19 @@
           <p class="tile-desc">
             Explore Liberty City as Claude Speed in the revolutionary 3D open-world crime epic that defined modern gaming! Built on the re3 WebAssembly engine with authentic audio, vehicle handling, and persistent IndexedDB saves.
           </p>
+          <!-- GTA 3 Quick Cheats -->
+          <div style="margin-bottom: 0.85rem; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 0.65rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--vc-cyan); margin-bottom: 5px;">⚡ Quick Cheats (Click to Copy):</div>
+            <div style="display:flex; gap: 4px; flex-wrap: wrap;">
+              <button class="btn-modal-action" style="padding: 3px 8px; font-size: 0.72rem;" onclick="copyCheat('GUNSGUNSGUNS', this)" title="All Weapons">🔫 WEAPONS</button>
+              <button class="btn-modal-action" style="padding: 3px 8px; font-size: 0.72rem;" onclick="copyCheat('GESUNDHEIT', this)" title="Full Health">❤️ HEALTH</button>
+              <button class="btn-modal-action" style="padding: 3px 8px; font-size: 0.72rem;" onclick="copyCheat('TURTOISE', this)" title="Full Armor">🛡️ ARMOR</button>
+              <button class="btn-modal-action" style="padding: 3px 8px; font-size: 0.72rem;" onclick="copyCheat('IFIWEREARICHMAN', this)" title="$250,000 Cash">💰 $250K</button>
+              <button class="btn-modal-action" style="padding: 3px 8px; font-size: 0.72rem;" onclick="copyCheat('GIVEUSATANK', this)" title="Rhino Tank">🚀 TANK</button>
+              <button class="btn-modal-action" style="padding: 3px 8px; font-size: 0.72rem;" onclick="copyCheat('NOPOLICEPLEASE', this)" title="Clear Wanted Level">⭐ 0 STARS</button>
+            </div>
+          </div>
+
           <div class="tile-footer">
             <span class="tile-meta">re3 C++ WebAssembly</span>
             <div style="display:flex; gap: 6px;">
@@ -1007,6 +1021,31 @@
     </section>
 
   </main>
+
+  <!-- GTA VI Tropical Palm Silhouettes Backdrop -->
+  <div class="gta6-palms-backdrop" id="gta6PalmsBackdrop" aria-hidden="true">
+    <svg class="gta6-palm palm-left" viewBox="0 0 320 480" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16,480 C18,360 40,240 100,160 C120,130 150,110 180,95 C140,80 80,75 20,90 C50,110 90,120 120,135 C80,120 30,125 0,145 C35,160 80,165 110,180 C150,75 190,50 250,30 C200,45 160,75 140,110 C180,50 240,25 310,10 C250,35 210,75 185,120 C220,70 280,55 320,55 C270,85 230,120 200,155 C240,125 290,125 320,140 C270,160 230,175 190,180 C230,185 280,205 300,235 C250,225 210,210 170,195 C150,230 110,340 70,480 Z" />
+    </svg>
+    <svg class="gta6-palm palm-right" viewBox="0 0 320 480" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16,480 C18,360 40,240 100,160 C120,130 150,110 180,95 C140,80 80,75 20,90 C50,110 90,120 120,135 C80,120 30,125 0,145 C35,160 80,165 110,180 C150,75 190,50 250,30 C200,45 160,75 140,110 C180,50 240,25 310,10 C250,35 210,75 185,120 C220,70 280,55 320,55 C270,85 230,120 200,155 C240,125 290,125 320,140 C270,160 230,175 190,180 C230,185 280,205 300,235 C250,225 210,210 170,195 C150,230 110,340 70,480 Z" />
+    </svg>
+  </div>
+
+  <!-- GTA VI Out-Of-This-Universe Cinematic Transition Overlay -->
+  <div class="gta6-cinematic-overlay" id="gta6CinematicOverlay" onclick="dismissGTA6Intro()" role="dialog" aria-modal="true" aria-label="GTA VI Cinematic Intro">
+    <div class="gta6-sunburst"></div>
+    <div class="gta6-cinematic-content">
+      <div class="gta6-state-tag">🌴 STATE OF LEONIDA 🌴</div>
+      <div class="gta6-giant-vi">
+        <span class="vi-v">V</span><span class="vi-i">I</span>
+      </div>
+      <div class="gta6-sub-brand">GRAND THEFT AUTO</div>
+      <div class="gta6-city-tag">VICE CITY • 2026 CYBER EDITION</div>
+      <div class="gta6-stars-row">★★★★★</div>
+      <div class="gta6-skip-tip">CLICK ANYWHERE OR PRESS ESC TO ENTER</div>
+    </div>
+  </div>
 
   <!-- Fullscreen Game Modal Overlay -->
   <div class="game-modal-overlay" id="gameModalOverlay">

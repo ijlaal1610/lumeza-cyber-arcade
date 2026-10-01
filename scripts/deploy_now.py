@@ -10,6 +10,7 @@ files_to_upload = [
     ('portal/index.html', '/home/ubuntu/index.html', '/var/www/games.lumeza.in/index.html'),
     ('portal/portal.js', '/home/ubuntu/portal.js', '/var/www/games.lumeza.in/portal.js'),
     ('portal/styles.css', '/home/ubuntu/styles.css', '/var/www/games.lumeza.in/styles.css'),
+    ('portal/guide.html', '/home/ubuntu/guide.html', '/var/www/games.lumeza.in/guide.html'),
     ('caesar3/index.html', '/home/ubuntu/caesar3_index.html', '/var/www/games.lumeza.in/caesar3/index.html'),
     ('caesar3/caesar3.ui.js', '/home/ubuntu/caesar3.ui.js', '/var/www/games.lumeza.in/caesar3/caesar3.ui.js')
 ]
@@ -26,10 +27,11 @@ copy_cmds = [
     'echo 0786 | sudo -S cp /home/ubuntu/index.html /var/www/games.lumeza.in/index.html',
     'echo 0786 | sudo -S cp /home/ubuntu/portal.js /var/www/games.lumeza.in/portal.js',
     'echo 0786 | sudo -S cp /home/ubuntu/styles.css /var/www/games.lumeza.in/styles.css',
+    'echo 0786 | sudo -S cp /home/ubuntu/guide.html /var/www/games.lumeza.in/guide.html',
     'echo 0786 | sudo -S cp /home/ubuntu/caesar3_index.html /var/www/games.lumeza.in/caesar3/index.html',
     'echo 0786 | sudo -S cp /home/ubuntu/caesar3.ui.js /var/www/games.lumeza.in/caesar3/caesar3.ui.js',
     'echo 0786 | sudo -S chown -R www-data:www-data /var/www/games.lumeza.in/',
-    'echo 0786 | sudo -S chmod 644 /var/www/games.lumeza.in/index.html /var/www/games.lumeza.in/portal.js /var/www/games.lumeza.in/styles.css /var/www/games.lumeza.in/caesar3/index.html /var/www/games.lumeza.in/caesar3/caesar3.ui.js',
+    'echo 0786 | sudo -S chmod 644 /var/www/games.lumeza.in/index.html /var/www/games.lumeza.in/portal.js /var/www/games.lumeza.in/styles.css /var/www/games.lumeza.in/guide.html /var/www/games.lumeza.in/caesar3/index.html /var/www/games.lumeza.in/caesar3/caesar3.ui.js',
     'echo 0786 | sudo -S systemctl reload nginx'
 ]
 
