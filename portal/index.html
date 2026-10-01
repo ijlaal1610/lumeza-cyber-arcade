@@ -24,6 +24,7 @@
       <!-- Category Filter Navigation -->
       <nav class="portal-nav">
         <button class="nav-filter active" onclick="filterGames('all', this)">★ ALL GAMES</button>
+        <button class="nav-filter" onclick="filterGames('strategy', this)">🏛️ STRATEGY</button>
         <button class="nav-filter" onclick="filterGames('openworld', this)">🏙️ 3D OPEN WORLD</button>
         <button class="nav-filter" onclick="filterGames('minecraft', this)">⛏️ MINECRAFT</button>
         <button class="nav-filter" onclick="filterGames('mario', this)">🍄 MARIO VAULT</button>
@@ -148,6 +149,29 @@
     </div>
 
     <div class="games-grid">
+
+      <!-- PHASE 4 HEADLINER: Caesar III (Empire of Rome) -->
+      <article class="game-tile" data-category="strategy retrox">
+        <div class="tile-media">
+          <div style="width:100%; height:100%; background: linear-gradient(135deg, #3d2b0e, #140d04); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size: 3.5rem;">🏛️</span>
+          </div>
+          <span class="tile-tag-badge" style="color:#e5b869; border-color:#e5b869;">JULIUS WASM</span>
+        </div>
+        <div class="tile-body">
+          <h3 class="tile-title">Caesar III: Empire of Rome</h3>
+          <p class="tile-desc">
+            Build and govern the eternal glory of the Roman Empire! Construct aqueducts, forums, bathhouses, and colosseums, manage trade routes, defend against barbarian sieges, and satisfy the Roman gods. Full retail campaign powered by Julius WebAssembly with 60 FPS WebGL rendering and persistent IndexedDB saves.
+          </p>
+          <div class="tile-footer">
+            <span class="tile-meta">Julius WebAssembly Engine</span>
+            <div style="display:flex; gap: 6px;">
+              <button class="tile-play-btn" onclick="launchCaesar3Modal()">▶ PLAY</button>
+              <button class="tile-play-btn" onclick="launchCaesar3Popout()">POPOUT ↗</button>
+            </div>
+          </div>
+        </div>
+      </article>
 
       <!-- PHASE 3 HEADLINER: Diablo 1 + Hellfire -->
       <article class="game-tile" data-category="rpg">

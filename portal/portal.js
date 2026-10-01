@@ -144,6 +144,14 @@ function copyCheat(code, btn) {
 }
 
 
+// --- STRATEGY & PHASE 4 LAUNCHERS ---
+function launchCaesar3Modal() {
+  launchGameModal('🏛️ Caesar III: Empire of Rome (Julius WASM)', '/caesar3/');
+}
+function launchCaesar3Popout() {
+  launchPopoutWindow('/caesar3/', 'Caesar3_Imperium');
+}
+
 // --- PHASE 3 LAUNCHERS ---
 function launchDiabloModal() {
   launchGameModal('⚔️ Diablo 1 + Hellfire (DevilutionX)', '/diablo/');

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Caesar III: Empire of Rome // Cyber Arcade</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+  
+  <!-- Self-Hosted Local Scripts (0 CDNs) -->
+  <script src="vendor/FileSaver.min.js"></script>
+  <script src="vendor/jszip.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(15, 18, 28, 0.95);
+      --gold: #e5b869;
+      --gold-glow: rgba(229, 184, 105, 0.35);
+      --cyan: #00f0ff;
+      --text: #e2e8f0;
+      --text-dim: #94a3b8;
+      --red: #ef4444;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Consolas', 'Courier New', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Game Canvas */
+    canvas#canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border: 0 none;
+      background-color: #000;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Top Floating Cyber Arcade Nav Bar */
+    #topNavBar {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      background: rgba(10, 14, 22, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(229, 184, 105, 0.3);
+      border-radius: 999px;
+      padding: 6px 14px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      transition: opacity 0.3s ease;
+    }
+
+    #topNavBar:hover {
+      border-color: var(--gold);
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      padding: 5px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background: rgba(229, 184, 105, 0.2);
+      border-color: var(--gold);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .nav-btn.primary {
+      background: linear-gradient(135deg, #a37a34, #d4a754);
+      border-color: #f7d070;
+      color: #1a1202;
+      font-weight: 700;
+    }
+
+    /* Main Modal / Loader Overlay */
+    div#infoLocation {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(16, 21, 33, 0.96) 0%, rgba(7, 9, 14, 0.98) 100%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .hero-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(229, 184, 105, 0.35);
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--gold-glow);
+      max-width: 580px;
+      width: 100%;
+      padding: 2.2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #d4a754, #f7d070, #00f0ff, #d4a754);
+      background-size: 200% auto;
+      animation: shimmer 4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .roman-eagle {
+      font-size: 3.2rem;
+      margin-bottom: 0.5rem;
+      filter: drop-shadow(0 0 16px rgba(229, 184, 105, 0.5));
+    }
+
+    h1.game-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    h1.game-title span {
+      color: var(--gold);
+      text-shadow: 0 0 20px var(--gold-glow);
+    }
+
+    .game-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Options / Buttons */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 1.2rem;
+    }
+
+    .btn-action {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+
+    .btn-action:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .btn-action.gold-primary {
+      background: linear-gradient(135deg, #c7963e, #f0c366);
+      border: 1px solid #ffe39b;
+      color: #140d02;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(229, 184, 105, 0.4);
+    }
+
+    .btn-action.gold-primary:hover {
+      background: linear-gradient(135deg, #d8a445, #ffd175);
+      box-shadow: 0 8px 28px rgba(229, 184, 105, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-action.danger {
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+
+    .btn-action.danger:hover {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    /* Status & Spinner */
+    #loadStatus {
+      margin: 1.5rem 0;
+    }
+
+    .spinner {
+      height: 44px;
+      width: 44px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      border: 3px solid rgba(229, 184, 105, 0.15);
+      border-top-color: var(--gold);
+      animation: spin 0.8s linear infinite;
+    }
+
+    .spinner.small {
+      height: 14px;
+      width: 14px;
+      border-width: 2px;
+      margin: 0;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #status {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    progress {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 14px;
+      display: none;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    progress::-webkit-progress-bar {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    progress::-webkit-progress-value {
+      background: linear-gradient(90deg, #c7963e, #00f0ff);
+      transition: width 0.2s ease;
+    }
+
+    progress::-moz-progress-bar {
+      background: linear-gradient(90deg, #c7963e, #00f0ff);
+    }
+
+    .drag-hover {
+      border: 2px dashed var(--gold) !important;
+    }
+
+    /* On-Screen Display */
+    #OSD {
+      display: none;
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(10, 14, 22, 0.85);
+      border: 1px solid rgba(229, 184, 105, 0.3);
+      border-radius: 6px;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      z-index: 30;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer-badge {
+      margin-top: 1.4rem;
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top In-Game Control Bar -->
+  <div id="topNavBar">
+    <a href="/" class="nav-btn">🔙 Arcade Portal</a>
+    <button class="nav-btn primary" onclick="toggleFullscreen()">⛶ Fullscreen</button>
+    <button class="nav-btn" onclick="Module.downloadSaves()">💾 Export Saves</button>
+    <button class="nav-btn" onclick="clickSelectFile()">📁 Import Files</button>
+    <button class="nav-btn" onclick="Module.showSubWindow(confirmElement)">🗑️ Reset Data</button>
+  </div>
+
+  <!-- On Screen Notification Overlay -->
+  <div id="OSD">
+    <span id="OSDSpinner" class="spinner small"></span>
+    <span id="OSDStatus"></span>
+  </div>
+
+  <!-- Hidden File Input for Custom Uploads -->
+  <input type="file" id="loaddir" multiple name="fileList" webkitdirectory style="display:none;">
+
+  <!-- Main Hero Modal / Loader Overlay -->
+  <div id="infoLocation">
+    <div class="hero-card">
+      <div class="roman-eagle">🏛️</div>
+      <h1 class="game-title">Caesar III <span>// Rome</span></h1>
+      <div class="game-subtitle">Julius WebAssembly Engine • 60 FPS WebGL</div>
+
+      <div id="middleElement">
+        <!-- Loading State -->
+        <div id="loadStatus">
+          <div id="spinner" class="spinner"></div>
+          <div id="status">Connecting virtual Roman filesystem...</div>
+          <progress id="progress"></progress>
+        </div>
+
+        <!-- Initial Options (Empty or Stored) -->
+        <div id="startOptions" style="display:none;">
+          <div class="button-group">
+            <button id="primaryPlayBtn" class="btn-action gold-primary" onclick="Module.startGame()">
+              ▶ ENTER ROME (RESUME CAMPAIGN)
+            </button>
+            <button class="btn-action" onclick="startPreloadedCampaign('lite')">
+              ⚡ RE-SYNC OPTIMIZED CAMPAIGN (82 MB)
+            </button>
+            <button class="btn-action" onclick="startPreloadedCampaign('full')">
+              📀 RE-SYNC FULL CD SOUNDTRACK (144 MB)
+            </button>
+            <div style="display:flex; gap: 8px;">
+              <button class="btn-action" id="downloadSaves" onclick="Module.downloadSaves()" style="flex:1;">
+                💾 Backup Saves (.zip)
+              </button>
+              <button class="btn-action" onclick="clickSelectFile()" style="flex:1;">
+                📁 Upload Custom Files
+              </button>
+            </div>
+            <button class="btn-action danger" onclick="Module.showSubWindow(confirmElement)">
+              🗑️ Reset Local Game Storage
+            </button>
+          </div>
+        </div>
+
+        <!-- Reset Confirmation -->
+        <div id="confirm" style="display:none;">
+          <p style="margin-bottom: 1.2rem; font-size: 0.95rem; line-height: 1.5;">
+            Are you sure you want to clear your local Roman Empire storage?<br>
+            <span style="color:var(--red); font-size:0.85rem;">All your local city saves will be deleted!</span>
+          </p>
+          <div style="display:flex; gap: 10px;">
+            <button class="btn-action danger" onclick="Module.clearFS()" style="flex:1;">YES, PURGE STORAGE</button>
+            <button class="btn-action" onclick="Module.showSubWindow(startOptionsElement)" style="flex:1;">CANCEL</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-badge">
+        <span>Press ESC in-game to access City Menu • Saves persist via IndexedDB</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SDL2 / WebAssembly Screen Canvas -->
+  <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+
+  <!-- UI Logic -->
+  <script src="caesar3.ui.js"></script>
+
+  <!-- Julius Engine Runtime -->
+  <script src="julius.engine.js"></script>
+
+</body>
+</html>
