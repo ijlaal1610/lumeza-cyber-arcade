@@ -175,7 +175,6 @@ var Module = {
   setStatus: function(text) {
     if (!Module.setStatus.last) Module.setStatus.last = { time: Date.now(), text: "" };
     if (text && text !== Module.setStatus.last.text) {
-      Module.showSubWindow(loadStatusElement);
       var match = text.match(/([^(]+)?\((\d+(\.\d+)?)\/(\d+)\)/);
       var now = Date.now();
       if (match && now - Module.setStatus.last.time < 16) return;
@@ -216,7 +215,7 @@ var Module = {
     if (!Module.running) {
       Module.clearOSD();
       infoElement.style.display = "flex";
-      loadStatusElement.style.display = (el === loadStatusElement) ? "block" : "none";
+      loadStatusElement.style.display = "block"; // Always keep status message visible
       startOptionsElement.style.display = (el === startOptionsElement) ? "block" : "none";
       confirmElement.style.display = (el === confirmElement) ? "block" : "none";
     }
@@ -224,6 +223,7 @@ var Module = {
   
   showFirstScreen: function() {
     removeEventListeners();
+    spinnerElement.style.display = "none";
     Module.showSubWindow(startOptionsElement);
   },
   
@@ -288,11 +288,11 @@ var Module = {
             // Storage is empty -> Prompt to start or auto-download campaign
             var pBtn = document.getElementById("primaryPlayBtn");
             if (pBtn) {
-              pBtn.innerHTML = "⚡ PLAY PRELOADED CAMPAIGN (82 MB)";
+              pBtn.innerHTML = "⚡ PLAY CAESAR III (LAUNCH CAMPAIGN)";
               pBtn.onclick = function() { startPreloadedCampaign("lite"); };
             }
+            Module.setStatus("Welcome Governor! Click <b>Play Caesar III</b> to start.");
             Module.showFirstScreen();
-            Module.setStatus("Welcome to Caesar III! Click <b>Play Preloaded Campaign</b> to begin.");
             addFileUploadEventListeners();
           } else {
             // Already has files -> Show Start Screen with instant play
@@ -301,6 +301,7 @@ var Module = {
               pBtn.innerHTML = "▶ ENTER ROME (RESUME CAMPAIGN)";
               pBtn.onclick = function() { Module.startGame(); };
             }
+            Module.setStatus("🏛️ Roman Empire files ready! Click to enter.");
             Module.showFirstScreen();
           }
         } else {

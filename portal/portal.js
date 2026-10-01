@@ -264,7 +264,16 @@ function filterGames(category, btn) {
   document.querySelectorAll('.nav-filter').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
 
-  const tiles = document.querySelectorAll('.game-tile');
+  const searchInput = document.getElementById('gameSearchInput');
+  if (searchInput && searchInput.value) {
+    searchInput.value = '';
+    const clearBtn = document.getElementById('clearSearchBtn');
+    if (clearBtn) clearBtn.style.display = 'none';
+    const countBadge = document.getElementById('searchResultCount');
+    if (countBadge) countBadge.style.display = 'none';
+  }
+
+  const tiles = originalTiles || Array.from(document.querySelectorAll('.game-tile'));
   tiles.forEach(tile => {
     const cats = (tile.getAttribute('data-category') || '').split(' ');
     if (category === 'all' || cats.includes(category)) {
@@ -273,6 +282,18 @@ function filterGames(category, btn) {
       tile.style.display = 'none';
     }
   });
+
+  // Handle shelf category rows if shelf layout is active
+  if (document.documentElement.getAttribute('data-layout') === 'shelf') {
+    document.querySelectorAll('.shelf-category-row').forEach(row => {
+      const shelfCat = row.getAttribute('data-shelf-cat') || '';
+      if (category === 'all' || shelfCat === category || (category === 'retrox' && shelfCat === 'strategy')) {
+        row.style.display = 'flex';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
 
   // Handle hero vice city visibility
   const hero = document.getElementById('heroViceCity');
@@ -501,12 +522,6 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowDown') { move2048('down'); e.preventDefault(); }
 });
 
-// Initialize on Load
-document.addEventListener('DOMContentLoaded', () => {
-  init2048();
-  showToast('🎮 Welcome to Lumeza Cyber-Arcade! GTA Vice City & CS 1.6 Ready.');
-});
-
 // Angry Birds Launchers
 function launchAngryBirdsModal() {
   launchGameModal('🐦 Angry Birds Classic (HTML5 Edition)', '/arcade/angry-birds/');
@@ -536,3 +551,282 @@ function launchGTA3Modal() {
 function launchGTA3Popout() {
   launchPopoutWindow('/gta3/', 'GTA3_LibertyCity');
 }
+
+// ==========================================================================
+// 10. ADVANCED SHELF LAYOUT ENGINE
+// ==========================================================================
+let originalTiles = null;
+
+function applyShelfLayout(active) {
+  const container = document.querySelector('.games-grid');
+  if (!container) return;
+
+  if (active) {
+    if (!originalTiles) {
+      originalTiles = Array.from(container.children).filter(el => el.classList.contains('game-tile'));
+    }
+
+    const categories = [
+      { key: 'strategy', label: '🏛️ Empire & Strategy', desc: 'Civilization building & grand campaigns' },
+      { key: 'openworld', label: '🏙️ 3D Open World & Adventures', desc: 'High-speed crime, tombs & exploration' },
+      { key: 'rpg', label: '⚔️ Dark Fantasy & Action RPG', desc: 'Dungeon crawling & deep lore' },
+      { key: 'shooters', label: '🎯 Shooters & Tactical Combat', desc: 'Precision FPS & fast deathmatches' },
+      { key: 'minecraft', label: '⛏️ Sandbox & Crafting', desc: 'Endless voxel building' },
+      { key: 'mario', label: '🍄 Platforming Legends', desc: 'Classic 3D & 2D agility' },
+      { key: 'win7', label: '🪟 Windows 7 Nostalgia Pack', desc: 'Purble Place, Pinball, Cards & Minesweeper' },
+      { key: 'arcade', label: '👾 Retro Arcade & Casual', desc: 'Quick reflexes, racing & puzzle classics' }
+    ];
+
+    container.innerHTML = '';
+    const assignedTiles = new Set();
+
+    categories.forEach(cat => {
+      const matching = originalTiles.filter(tile => {
+        if (assignedTiles.has(tile)) return false;
+        const cats = (tile.getAttribute('data-category') || '').split(' ');
+        return cats.includes(cat.key);
+      });
+
+      if (matching.length > 0) {
+        matching.forEach(t => assignedTiles.add(t));
+        const row = document.createElement('section');
+        row.className = 'shelf-category-row';
+        row.setAttribute('data-shelf-cat', cat.key);
+        row.innerHTML = `
+          <div class="shelf-header">
+            <h3 class="shelf-title">${cat.label}</h3>
+            <span class="tile-meta">${matching.length} TITLES</span>
+          </div>
+          <div class="shelf-scroller"></div>
+        `;
+        const scroller = row.querySelector('.shelf-scroller');
+        matching.forEach(t => scroller.appendChild(t));
+        container.appendChild(row);
+      }
+    });
+
+    const unassigned = originalTiles.filter(t => !assignedTiles.has(t));
+    if (unassigned.length > 0) {
+      const row = document.createElement('section');
+      row.className = 'shelf-category-row';
+      row.setAttribute('data-shelf-cat', 'arcade');
+      row.innerHTML = `
+        <div class="shelf-header">
+          <h3 class="shelf-title">👾 Additional Arcade Classics</h3>
+          <span class="tile-meta">${unassigned.length} TITLES</span>
+        </div>
+        <div class="shelf-scroller"></div>
+      `;
+      const scroller = row.querySelector('.shelf-scroller');
+      unassigned.forEach(t => scroller.appendChild(t));
+      container.appendChild(row);
+    }
+  } else {
+    // Restore flat grid
+    if (originalTiles) {
+      container.innerHTML = '';
+      originalTiles.forEach(t => container.appendChild(t));
+    }
+  }
+}
+
+// ==========================================================================
+// 11. THEME & LAYOUT CONTROLLERS
+// ==========================================================================
+function setTheme(theme) {
+  const validThemes = ['cyber', 'gta6', 'overdrive', 'crt'];
+  if (!validThemes.includes(theme)) theme = 'cyber';
+
+  document.documentElement.setAttribute('data-theme', theme);
+  try { localStorage.setItem('lumeza_theme', theme); } catch(e) {}
+
+  document.querySelectorAll('[data-theme-btn]').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-theme-btn') === theme);
+  });
+
+  const names = {
+    cyber: 'Cyber Synth (Default)',
+    gta6: 'GTA VI // Leonida Sunset 🌴',
+    overdrive: 'Hyper-Animated Overdrive ✨',
+    crt: 'Retro CRT 90s Arcade'
+  };
+
+  showToast(`⚡ Theme: ${names[theme] || theme.toUpperCase()}`);
+}
+
+function setLayout(layout) {
+  const validLayouts = ['grid', 'shelf', 'compact'];
+  if (!validLayouts.includes(layout)) layout = 'grid';
+
+  document.documentElement.setAttribute('data-layout', layout);
+  try { localStorage.setItem('lumeza_layout', layout); } catch(e) {}
+
+  document.querySelectorAll('[data-layout-btn]').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-layout-btn') === layout);
+  });
+
+  applyShelfLayout(layout === 'shelf');
+
+  const names = {
+    grid: 'Responsive Grid View',
+    shelf: 'Console Streaming Shelves',
+    compact: 'Compact Arcade List'
+  };
+
+  showToast(`⚡ Layout: ${names[layout] || layout.toUpperCase()}`);
+}
+
+// ==========================================================================
+// 12. LIVE GAME SEARCH ENGINE
+// ==========================================================================
+function handleGameSearch(query) {
+  const q = (query || '').trim().toLowerCase();
+  const clearBtn = document.getElementById('clearSearchBtn');
+  const countBadge = document.getElementById('searchResultCount');
+  const hero = document.getElementById('heroViceCity');
+  const retroPanel = document.getElementById('retroArcadePanel');
+
+  if (clearBtn) clearBtn.style.display = q.length > 0 ? 'block' : 'none';
+
+  const container = document.querySelector('.games-grid');
+  if (!originalTiles && container) {
+    originalTiles = Array.from(container.children).filter(el => el.classList.contains('game-tile'));
+  }
+
+  const allTiles = originalTiles || Array.from(document.querySelectorAll('.game-tile'));
+
+  if (!q) {
+    if (countBadge) countBadge.style.display = 'none';
+    const activeNav = document.querySelector('.nav-filter.active');
+    const currentCat = activeNav ? (activeNav.getAttribute('onclick') || '').match(/'([^']+)'/)?.[1] || 'all' : 'all';
+    filterGames(currentCat, activeNav);
+    document.querySelectorAll('.shelf-category-row').forEach(row => row.style.display = 'flex');
+    return;
+  }
+
+  let matchCount = 0;
+  allTiles.forEach(tile => {
+    const title = (tile.querySelector('.tile-title')?.textContent || '').toLowerCase();
+    const desc = (tile.querySelector('.tile-desc')?.textContent || '').toLowerCase();
+    const badge = (tile.querySelector('.tile-tag-badge')?.textContent || '').toLowerCase();
+    const meta = (tile.querySelector('.tile-meta')?.textContent || '').toLowerCase();
+    const category = (tile.getAttribute('data-category') || '').toLowerCase();
+
+    const matches = title.includes(q) || desc.includes(q) || badge.includes(q) || meta.includes(q) || category.includes(q);
+    if (matches) {
+      tile.style.display = 'flex';
+      matchCount++;
+    } else {
+      tile.style.display = 'none';
+    }
+  });
+
+  // Handle shelf layout row visibility during search
+  document.querySelectorAll('.shelf-category-row').forEach(row => {
+    const visibleTiles = row.querySelectorAll('.game-tile:not([style*="display: none"])');
+    row.style.display = visibleTiles.length > 0 ? 'flex' : 'none';
+  });
+
+  if (countBadge) {
+    countBadge.textContent = `${matchCount} MATCH${matchCount === 1 ? '' : 'ES'}`;
+    countBadge.style.display = 'inline-block';
+  }
+
+  // Hero visibility based on query
+  if (hero) {
+    const vcMatch = 'grand theft auto vice city miami tommy vercetti rockstar'.includes(q) || q.includes('vice') || q.includes('gta');
+    hero.style.display = vcMatch ? 'block' : 'none';
+  }
+
+  // Retro panel visibility
+  if (retroPanel) {
+    const retroMatch = 'retro 2048 snake minesweeper arcade classic'.includes(q);
+    retroPanel.style.display = retroMatch ? 'block' : 'none';
+  }
+}
+
+function clearGameSearch() {
+  const input = document.getElementById('gameSearchInput');
+  if (input) {
+    input.value = '';
+    handleGameSearch('');
+    input.focus();
+  }
+}
+
+// ==========================================================================
+// 13. 3D CARD TILT & OVERDRIVE PHYSICS
+// ==========================================================================
+function initCardTiltPhysics() {
+  document.addEventListener('mousemove', (e) => {
+    const theme = document.documentElement.getAttribute('data-theme');
+    if (theme !== 'overdrive' && theme !== 'gta6') return;
+
+    const tile = e.target.closest('.game-tile');
+    if (!tile) return;
+
+    const rect = tile.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const tiltX = ((y - centerY) / centerY) * -10;
+    const tiltY = ((x - centerX) / centerX) * 10;
+
+    tile.style.transform = `perspective(800px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-8px) scale3d(1.025, 1.025, 1.025)`;
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const tile = e.target.closest('.game-tile');
+    if (tile && !tile.contains(e.relatedTarget)) {
+      tile.style.transform = '';
+    }
+  });
+}
+
+// Global hotkeys for search: '/' and 'Escape'
+window.addEventListener('keydown', (e) => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+    const searchInput = document.getElementById('gameSearchInput');
+    if (searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
+  } else if (e.key === 'Escape' && document.activeElement.id === 'gameSearchInput') {
+    clearGameSearch();
+    document.activeElement.blur();
+  }
+});
+
+// ==========================================================================
+// 14. INITIALIZE ON DOM READY
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.games-grid');
+  if (container) {
+    originalTiles = Array.from(container.children).filter(el => el.classList.contains('game-tile'));
+  }
+
+  init2048();
+  initCardTiltPhysics();
+
+  // Restore saved theme
+  try {
+    const savedTheme = localStorage.getItem('lumeza_theme') || 'cyber';
+    setTheme(savedTheme);
+  } catch(e) {
+    setTheme('cyber');
+  }
+
+  // Restore saved layout
+  try {
+    const savedLayout = localStorage.getItem('lumeza_layout') || 'grid';
+    setLayout(savedLayout);
+  } catch(e) {
+    setLayout('grid');
+  }
+
+  showToast('🎮 Welcome to Lumeza Cyber-Arcade! GTA Vice City, Caesar III & 20+ Games Ready.');
+});

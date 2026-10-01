@@ -54,6 +54,37 @@
     </div>
   </header>
 
+  <!-- SUB-HEADER TOOLBAR: SEARCH, THEMES & LAYOUTS -->
+  <aside class="portal-toolbar" aria-label="Arcade Controls and Search">
+    <!-- Live Game Search Bar -->
+    <div class="toolbar-search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="gameSearchInput" class="game-search-input" placeholder="Search 20+ games... (press '/' to focus)" oninput="handleGameSearch(this.value)" autocomplete="off">
+      <button id="clearSearchBtn" class="clear-search-btn" onclick="clearGameSearch()" title="Clear Search">✕</button>
+      <span id="searchResultCount" class="search-count-badge"></span>
+    </div>
+
+    <!-- Theme & Layout Controls -->
+    <div class="toolbar-controls-wrap">
+      <!-- Layout Picker -->
+      <div class="control-pill-group" role="group" aria-label="Layout Selection">
+        <span class="control-group-label">LAYOUT:</span>
+        <button class="layout-btn active" data-layout-btn="grid" onclick="setLayout('grid')">⊞ GRID</button>
+        <button class="layout-btn" data-layout-btn="shelf" onclick="setLayout('shelf')">▤ SHELVES</button>
+        <button class="layout-btn" data-layout-btn="compact" onclick="setLayout('compact')">☰ LIST</button>
+      </div>
+
+      <!-- Theme Picker -->
+      <div class="control-pill-group" role="group" aria-label="Theme Selection">
+        <span class="control-group-label">THEME:</span>
+        <button class="theme-btn active" data-theme-btn="cyber" onclick="setTheme('cyber')">CYBER SYNTH</button>
+        <button class="theme-btn" data-theme-btn="gta6" onclick="setTheme('gta6')">GTA VI 🌴</button>
+        <button class="theme-btn" data-theme-btn="overdrive" onclick="setTheme('overdrive')">OVERDRIVE ✨</button>
+        <button class="theme-btn" data-theme-btn="crt" onclick="setTheme('crt')">CRT 90s</button>
+      </div>
+    </div>
+  </aside>
+
   <!-- Hidden Switch Modal (Discreet switch to Crafted Soul main site) -->
   <div class="secret-dialog-backdrop" id="secretSwitchModal" onclick="if(event.target===this)closeSecretSwitchModal()">
     <div class="secret-dialog-card">

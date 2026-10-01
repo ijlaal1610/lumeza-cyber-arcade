@@ -908,3 +908,574 @@ body::before {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+/* ==========================================================================
+   SUB-HEADER TOOLBAR: SEARCH, THEMES & LAYOUTS
+   ========================================================================== */
+.portal-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 0.85rem 2rem;
+  background: rgba(11, 15, 23, 0.92);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 61px;
+  z-index: 90;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.toolbar-search-wrap {
+  position: relative;
+  flex: 1 1 300px;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 0.95rem;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.game-search-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 8px 36px 8px 38px;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.game-search-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--vc-cyan);
+  box-shadow: 0 0 16px var(--vc-cyan-glow);
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--text-muted);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  font-size: 0.75rem;
+  line-height: 20px;
+  text-align: center;
+  transition: background 0.2s;
+}
+
+.clear-search-btn:hover {
+  background: var(--vc-pink);
+  color: #fff;
+}
+
+.search-count-badge {
+  position: absolute;
+  right: -85px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--vc-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 999px;
+  padding: 2px 8px;
+  display: none;
+}
+
+.toolbar-controls-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.control-pill-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.control-group-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 4px;
+  padding-left: 4px;
+}
+
+.theme-btn, .layout-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+}
+
+.theme-btn:hover, .layout-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.theme-btn.active, .layout-btn.active {
+  background: var(--vc-pink);
+  color: #fff;
+  border-color: var(--vc-pink);
+  box-shadow: 0 0 12px var(--vc-pink-glow);
+}
+
+/* ==========================================================================
+   THEME 1: GTA VI // LEONIDA SUNSET (Vice City Next-Gen)
+   ========================================================================== */
+[data-theme="gta6"] {
+  --bg-deep: #0c0517;
+  --bg-surface: #180826;
+  --bg-card: rgba(29, 12, 46, 0.88);
+  --bg-card-hover: rgba(45, 18, 72, 0.95);
+  
+  --vc-pink: #ff007f;
+  --vc-pink-glow: rgba(255, 0, 127, 0.55);
+  --vc-cyan: #00f5d4;
+  --vc-cyan-glow: rgba(0, 245, 212, 0.5);
+  --cs-amber: #ffbe0b;
+  --cs-amber-glow: rgba(255, 190, 11, 0.5);
+  --neon-emerald: #06d6a0;
+  --neon-violet: #8338ec;
+  
+  --text-main: #fff5fb;
+  --text-muted: #d8b4e2;
+  --border-subtle: rgba(255, 0, 127, 0.2);
+  --border-active: rgba(255, 190, 11, 0.7);
+}
+
+[data-theme="gta6"] body {
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 0, 127, 0.3) 0%, rgba(255, 190, 11, 0.15) 40%, transparent 70%),
+    radial-gradient(circle at 15% 35%, rgba(0, 245, 212, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(131, 56, 236, 0.15) 0%, transparent 50%),
+    linear-gradient(180deg, #150624 0%, #260938 45%, #0c0517 100%);
+  background-size: 100% 100%;
+}
+
+[data-theme="gta6"] .brand-title {
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, #ff007f 10%, #ffbe0b 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.5));
+}
+
+[data-theme="gta6"] .theme-btn.active, 
+[data-theme="gta6"] .layout-btn.active {
+  background: linear-gradient(135deg, #ff007f, #ffbe0b);
+  border-color: #ffbe0b;
+  color: #1a0520;
+  box-shadow: 0 0 16px rgba(255, 0, 127, 0.6);
+}
+
+[data-theme="gta6"] .hero-vicecity {
+  border: 1px solid rgba(255, 190, 11, 0.4);
+  box-shadow: 0 0 50px rgba(255, 0, 127, 0.3), inset 0 0 30px rgba(0, 245, 212, 0.1);
+  background: linear-gradient(135deg, rgba(38, 9, 56, 0.95), rgba(12, 5, 23, 0.98));
+}
+
+[data-theme="gta6"] .vc-hero-title {
+  font-style: italic;
+  transform: skewX(-4deg);
+  background: linear-gradient(135deg, #fff 20%, #ffbe0b 60%, #ff007f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 25px rgba(255, 0, 127, 0.4));
+}
+
+[data-theme="gta6"] .btn-vc-play,
+[data-theme="gta6"] .tile-play-btn {
+  background: linear-gradient(135deg, #ff007f, #ffbe0b);
+  color: #120317;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 1px solid #ffd166;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+  transform: skewX(-3deg);
+}
+
+[data-theme="gta6"] .btn-vc-play:hover,
+[data-theme="gta6"] .tile-play-btn:hover {
+  background: linear-gradient(135deg, #ff3399, #ffd166);
+  box-shadow: 0 0 28px rgba(255, 190, 11, 0.6);
+  transform: skewX(-3deg) scale(1.03);
+}
+
+[data-theme="gta6"] .game-tile {
+  background: linear-gradient(145deg, rgba(32, 14, 52, 0.9), rgba(16, 7, 28, 0.95));
+  border: 1px solid rgba(255, 0, 127, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  border-radius: 14px;
+}
+
+[data-theme="gta6"] .game-tile:hover {
+  border-color: #ffbe0b;
+  box-shadow: 0 15px 40px rgba(255, 0, 127, 0.3), 0 0 20px rgba(255, 190, 11, 0.25);
+  transform: translateY(-5px);
+}
+
+[data-theme="gta6"] .tile-title {
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+[data-theme="gta6"] .tile-tag-badge {
+  background: rgba(255, 0, 127, 0.15);
+  border-color: #ff007f;
+  color: #ffbe0b;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   THEME 2: HYPER-ANIMATED OVERDRIVE (Animation in Every Single Thing)
+   ========================================================================== */
+[data-theme="overdrive"] {
+  --bg-deep: #05070f;
+  --bg-surface: #0a0e1a;
+  --bg-card: rgba(14, 20, 36, 0.85);
+  --bg-card-hover: rgba(22, 32, 58, 0.95);
+  --vc-pink: #ff0055;
+  --vc-cyan: #00f0ff;
+  --cs-amber: #ffbb00;
+  --border-subtle: rgba(0, 240, 255, 0.25);
+}
+
+[data-theme="overdrive"] body {
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(0, 240, 255, 0.06) 0%, transparent 60%),
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 85, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 40px 40px, 40px 40px;
+  animation: gridScrollOverdrive 20s linear infinite;
+}
+
+@keyframes gridScrollOverdrive {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 0 0, 0 800px, 800px 0; }
+}
+
+/* Pulsing Rainbow Laser Borders on All Tiles */
+[data-theme="overdrive"] .game-tile {
+  position: relative;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  animation: rainbowBorderLoop 6s linear infinite, tileFloatIdle 4s ease-in-out infinite alternate;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+[data-theme="overdrive"] .game-tile:hover {
+  transform: translateY(-8px) scale(1.025);
+  box-shadow: 0 20px 50px rgba(0, 240, 255, 0.4), 0 0 30px rgba(255, 0, 85, 0.3);
+}
+
+@keyframes rainbowBorderLoop {
+  0% { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.25); }
+  33% { border-color: #ff0055; box-shadow: 0 0 15px rgba(255, 0, 85, 0.25); }
+  66% { border-color: #ffbb00; box-shadow: 0 0 15px rgba(255, 187, 0, 0.25); }
+  100% { border-color: #00f0ff; box-shadow: 0 0 15px rgba(0, 240, 255, 0.25); }
+}
+
+@keyframes tileFloatIdle {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-3px); }
+}
+
+/* Animated Title Glitch & Shimmer */
+[data-theme="overdrive"] .tile-title {
+  background: linear-gradient(90deg, #fff, #00f0ff, #ff0055, #fff);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textShimmer 5s ease-in-out infinite;
+}
+
+@keyframes textShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Bouncing / Floating Badges */
+[data-theme="overdrive"] .tile-tag-badge {
+  animation: badgeBlink 3s ease-in-out infinite alternate;
+}
+
+@keyframes badgeBlink {
+  0% { transform: scale(0.96); filter: brightness(0.9); }
+  100% { transform: scale(1.04); filter: brightness(1.2); }
+}
+
+/* Radiating Pulse Play Buttons */
+[data-theme="overdrive"] .tile-play-btn,
+[data-theme="overdrive"] .btn-vc-play {
+  position: relative;
+  background: linear-gradient(135deg, #00f0ff, #ff0055);
+  border: 1px solid #fff;
+  animation: playPulseGlow 2.5s infinite;
+}
+
+@keyframes playPulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7); }
+  70% { box-shadow: 0 0 0 12px rgba(0, 240, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+}
+
+/* Micro-animating Navigation Filter Tabs */
+[data-theme="overdrive"] .nav-filter:hover {
+  transform: translateY(-2px) scale(1.05);
+  animation: navTabRainbow 2s linear infinite;
+}
+
+@keyframes navTabRainbow {
+  0% { border-color: #00f0ff; }
+  50% { border-color: #ff0055; }
+  100% { border-color: #00f0ff; }
+}
+
+/* Brand Icon & Title Pulsing Vibration */
+[data-theme="overdrive"] .brand-icon {
+  animation: iconPulseOverdrive 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes iconPulseOverdrive {
+  0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 5px #00f0ff); }
+  50% { transform: scale(1.15) rotate(-6deg); filter: drop-shadow(0 0 16px #ff0055); }
+  100% { transform: scale(1) rotate(6deg); filter: drop-shadow(0 0 12px #ffbb00); }
+}
+
+/* Thumbnail Emoji Bobbing / Floating */
+[data-theme="overdrive"] .tile-media span {
+  display: inline-block;
+  animation: emojiFloat 3.5s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes emojiFloat {
+  0% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-6px) scale(1.08) rotate(3deg); }
+  100% { transform: translateY(2px) scale(0.96) rotate(-3deg); }
+}
+
+/* Search Bar Laser Glow Animation */
+[data-theme="overdrive"] .game-search-input:focus {
+  animation: searchLaserGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes searchLaserGlow {
+  0% { border-color: #00f0ff; box-shadow: 0 0 20px rgba(0, 240, 255, 0.6); }
+  100% { border-color: #ff0055; box-shadow: 0 0 25px rgba(255, 0, 85, 0.7); }
+}
+
+/* Hero Vice City Ambient Breathing Glow */
+[data-theme="overdrive"] .hero-glow-vc {
+  animation: heroBreathingGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes heroBreathingGlow {
+  0% { opacity: 0.3; transform: scale(0.95); filter: blur(50px); }
+  100% { opacity: 0.75; transform: scale(1.15); filter: blur(75px); }
+}
+
+/* ==========================================================================
+   THEME 3: RETRO CRT ARCADE CABINET
+   ========================================================================== */
+[data-theme="crt"] {
+  --bg-deep: #030a03;
+  --bg-surface: #061406;
+  --bg-card: rgba(8, 24, 8, 0.9);
+  --bg-card-hover: rgba(14, 40, 14, 0.98);
+  --vc-pink: #00ff66;
+  --vc-pink-glow: rgba(0, 255, 102, 0.5);
+  --vc-cyan: #33ff88;
+  --vc-cyan-glow: rgba(51, 255, 136, 0.45);
+  --cs-amber: #ffcc00;
+  --text-main: #33ff88;
+  --text-muted: #1f9952;
+  --border-subtle: rgba(0, 255, 102, 0.25);
+  --font-display: var(--font-mono);
+}
+
+[data-theme="crt"] body {
+  background-color: var(--bg-deep);
+  background-image: 
+    linear-gradient(rgba(0, 255, 102, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 102, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+}
+
+[data-theme="crt"] body::before {
+  opacity: 0.6;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 102, 0.1) 50%);
+  background-size: 100% 3px;
+}
+
+[data-theme="crt"] .game-tile {
+  border: 1px solid #00ff66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.2), inset 0 0 15px rgba(0, 255, 102, 0.05);
+}
+
+[data-theme="crt"] .tile-title {
+  font-family: var(--font-mono);
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.7);
+}
+
+[data-theme="crt"] .tile-play-btn {
+  background: #00ff66;
+  color: #030a03;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  border: 1px solid #33ff88;
+  box-shadow: 0 0 12px rgba(0, 255, 102, 0.5);
+}
+
+/* ==========================================================================
+   LAYOUT 2: CONSOLE SHELVES / STREAMING VIEW (Netflix / PS5 Style)
+   ========================================================================== */
+[data-layout="shelf"] .games-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2.5rem !important;
+}
+
+[data-layout="shelf"] .shelf-category-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+[data-layout="shelf"] .shelf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 3px solid var(--vc-cyan);
+  padding-left: 12px;
+}
+
+[data-layout="shelf"] .shelf-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+[data-layout="shelf"] .shelf-scroller {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+[data-layout="shelf"] .shelf-scroller::-webkit-scrollbar {
+  height: 6px;
+}
+
+[data-layout="shelf"] .shelf-scroller::-webkit-scrollbar-thumb {
+  background: var(--vc-cyan);
+  border-radius: 999px;
+}
+
+[data-layout="shelf"] .shelf-scroller .game-tile {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+}
+
+/* ==========================================================================
+   LAYOUT 3: COMPACT ARCADE LIST VIEW
+   ========================================================================== */
+[data-layout="compact"] .games-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+[data-layout="compact"] .game-tile {
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 10px 16px !important;
+  border-radius: 10px !important;
+}
+
+[data-layout="compact"] .tile-media {
+  width: 60px !important;
+  height: 60px !important;
+  flex-shrink: 0 !important;
+  border-radius: 8px !important;
+}
+
+[data-layout="compact"] .tile-media span {
+  font-size: 1.8rem !important;
+}
+
+[data-layout="compact"] .tile-body {
+  padding: 0 16px !important;
+  display: flex !important;
+  flex: 1 !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+
+[data-layout="compact"] .tile-title {
+  font-size: 1.05rem !important;
+  margin-bottom: 2px !important;
+}
+
+[data-layout="compact"] .tile-desc {
+  display: none !important;
+}
+
+[data-layout="compact"] .tile-footer {
+  margin-top: 0 !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
