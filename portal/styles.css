@@ -1453,16 +1453,27 @@ body::before {
   display: inline-block;
 }
 
-/* Wanted Level Star HUD in Header */
+/* Wanted Level Star HUD in Header (Classic 6 Stars Maximum Heat) */
 .gta6-wanted-stars {
   display: none;
   color: #ffbe0b;
   font-size: 1.15rem;
   letter-spacing: 2px;
-  text-shadow: 0 0 12px rgba(255, 190, 11, 0.7);
-  animation: starPulseGlow 1.5s ease-in-out infinite alternate;
+  text-shadow: 0 0 12px rgba(255, 190, 11, 0.7), 0 0 20px rgba(255, 0, 80, 0.5);
+  animation: wanted6StarHeat 1.4s ease-in-out infinite alternate;
   user-select: none;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.gta6-wanted-stars:hover {
+  transform: scale(1.12);
+}
+
+@keyframes wanted6StarHeat {
+  0% { color: #ffbe0b; text-shadow: 0 0 10px rgba(255, 190, 11, 0.8); }
+  50% { color: #ff3366; text-shadow: 0 0 18px rgba(255, 51, 102, 0.9), 0 0 30px rgba(0, 240, 255, 0.4); }
+  100% { color: #ffbe0b; text-shadow: 0 0 14px rgba(255, 190, 11, 1); }
 }
 
 [data-theme="gta6"] .gta6-wanted-stars {
